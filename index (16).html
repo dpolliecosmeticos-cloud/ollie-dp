@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registro de Processos — Departamento Pessoal</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap');
+:root{ --paper:#FAEDFF; --card:#ffffff; --ink:#232c33; --steel:#FF502C; --accent:#DBA8E5; --ok:#1F8A52; --warn:#8A6D00; --danger:#E7002A; --line:#EBD4E8; --muted:#78716c; }
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:14px;}
+h1,h2{font-family:'Source Serif 4',serif;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);}
+th{color:var(--muted);font-weight:500;font-size:12px;}
+input,select,textarea{font-family:inherit;font-size:13px;background:var(--card);color:var(--ink);border:1px solid var(--line);padding:6px 8px;}
+button{font-family:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 12px;font-size:13px;}
+button.primary{background:var(--steel);color:#fff;border-color:var(--steel);}
+button.link{border:none;background:none;padding:2px;color:var(--muted);}
+.card{border:1px solid var(--line);background:var(--card);padding:14px;}
+.flex{display:flex;} .wrap{flex-wrap:wrap;} .gap8{gap:8px;} .between{justify-content:space-between;} .center{align-items:center;}
+.muted{color:var(--muted);}
+.tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border:1px solid;font-size:12px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.etapa-drag-item{position:relative;transition:all 0.15s ease;}
+.etapa-drag-item:hover{background:rgba(255,80,44,0.05) !important;}
+.etapa-drag-item:active{cursor:grabbing !important;}
+.etapa-drag-item input{border:none;background:transparent;}
+.etapa-drag-item input:focus{outline:none;border-bottom:1px solid var(--steel) !important;box-shadow:0 0 0 3px rgba(255,80,44,0.1);}
+@media(max-width:700px){.grid4{grid-template-columns:repeat(2,1fr);}}
+.bar{height:6px;background:var(--line);position:relative;width:100px;}
+.bar>div{position:absolute;inset:0 auto 0 0;}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;z-index:50;}
+.panel{background:var(--card);border-left:1px solid var(--line);width:100%;max-width:460px;height:100%;overflow:auto;padding:20px;margin-left:auto;}
+.modal{background:var(--card);border:1px solid var(--line);width:100%;max-width:400px;padding:20px;margin:auto;}
+nav.tabs{display:flex;gap:16px;padding:0 20px;border-bottom:1px solid var(--line);background:var(--card);overflow-x:auto;}
+nav.tabs button{border:none;background:none;padding:12px 2px;border-bottom:2px solid transparent;color:var(--muted);font-weight:500;}
+nav.tabs button.active{color:var(--steel);border-color:var(--steel);}
+.stackbar{display:flex;height:10px;width:100%;overflow:hidden;border:1px solid var(--line);}
+.hidden{display:none!important;}
+</style>
+</head>
+<body>
+<div id="app"><div style="padding:40px;text-align:center" class="muted">Carregando...</div></div>
+<script>
+/* ============ CONFIGURAÇÃO — cole aqui os dados do seu projeto Supabase ============ */
+const SUPABASE_URL = "https://iaiqfwehbnvnnmzikrnc.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_EUwIq5PN_uIZtJKyiM8Wqg_Wy5FX-l0";
+/* ==================================================================================== */
+
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const C = {ok:"#1F8A52",warn:"#8A6D00",danger:"#E7002A",steel:"#FF502C",accent:"#DBA8E5"};
+const LOGO_DATA_URI = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAx8AAAIcCAYAAACXRxO/AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAJDlJREFUeNrs3UuMVnXeJ/ADgtByEV8qjYOddBFMcGFDmeiqJrFwkqleDaVmVj0RmMW8ibNQXLgU6N3rwstinMxmLMi46tgWvZJ30ZTJywoTC4ZFm7ShTLp5ZYKvpZTIRWXO7+E8WkA9T1U9l/Ocy+eTnJQCdfufy+98z/9ykgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqmOVJoDu3Zp4fKzQJ/rU+WntWd/2XNCmRW7X6TK2KwArs0YTQE+cKvjPt0p71ro9kyx4HC74zyh8AFTcak0AAAAIHwAAgPABAAAgfAAAAMIHAAAgfAAAAAgfAACA8AEAACB8AAAAwgcAACB8AAAACB8AAIDwAQAAIHwAAADCBwAAIHwAAAAIHwAAgPABAAAgfAAAAMIHAAAgfAAAAAgfAACA8AEAACB8AAAAwgcAACB8AAAACB8AAIDwAQAACB8AAADCBwAAIHwAAAAIHwAAgPABAAAIHwAAAMIHAAAgfAAAAAgfAACA8AEAAAgfAAAAwgcAACB8AAAACB8AAIDwAQAACB8AAADCBwAAIHwAAAAIHwAAgPABAAAIHwAAACuzRhMA1MJsuk0X/OcDQPgAoOxWTZ2fTD9MagkABsmwKwAAQPgAAACEDwAAAOEDAAAQPgAAAOEDAABA+AAAAIQPAAAA4QMAABA+AAAA4QMAAED4AAAAhA8AAADhAwAAED4AAADhAwAAQPgAAACEDwAAAOEDAAAQPgAAAOEDAABA+AAAAIQPAACAZI0mKLZbE4+PpB+2LPHPZldNnZ/VWgB0UW/GlvHP1Bv64m8nLzXvd2Ib6fLLTTeP11+Nb3O8Ch8scrEfzrY9C066LSv8Oj8VhgXb5+k2kxWLGa0NoN70ud7MCCcsETKGs+MutqcXHJO9dHjB90ua90LpdjYLJjNpKJmzNwZjlSbI9cIfF/iJ7KI/1oNk38mTgI/iY1ocpu2Rnu7bW4U+0afOr9Ke9W1PanlNGs7qzCDqzVx2s6feEDf/W7JjcF/2cbggP9pMdl90Ig0ijlHho1IFIC74+wcUNpYylRWHKU+q3CxrT+ED9Ua9oYeBYyILHBMl+JHnsmP0mCAifJS1AESqfyk74YZL8mPHE4C3s8KgK9LNsvasWPjIrktFvh6ZS6DeUP7QMbLgeNxS0l8jrkPH0u0tQ7OEjzIUgQPJz0+dymwyCoN5Im6WtWelwseRZME46AI6mrbrEVcT9YZSho6x7PoyVrFfLY7Poyat95YJ590XgGbXYpx0wxX5taKoHUh/t+nshmDangYoRL2J6/NL6g0FCh3vVuh4XPT4TH9PIaSHvOeju0LwcvrhQoVPvLionEp/z1PLXIIRgP7UmyNZvXlTvaEIoSPdTsU+q3DwuDuEXEh/53ez+SwIH7kXgYl0axaBOhyEC4vCsCMAIPd6c1i9oQChY0vcgGeho44hsRlCjjgahI+8isBwXBDT//ygJkl/saJwIW2DN7PufwDUm37WmyPqTWGCRwwxv5DdgNdZHI+H0/b4JJtgj/DRt0IQQ6w+qWnSv1ujLXSNA/Sl3hzJbvJcY2/3+Kg3gw0d0dvxQRaEBcGfRfD4RC+I8NGPIrAle/r0ppPuDsPJ7a7xNzUFQE/qTbO347DWWLTeuMnLP3iMZUF4Qmu0Dsgx/8VcEOGjV4WgedKNaY2WXk7b6RNjcwG6qjdxc6d3fYmbvKzeuMnLJ3jEKIcIw9p7aY37xSysIXx0XAicdMvX6HrM3q4LwMrqzZHEkJaV1JsL6k3fg0dMKjeyYWXi/I0ekAOaQvjopBA46To76T7JXnwFwPLrjWFW6k1RQkfM74geOG3buViO1z2k8LHsIhDzOz5w0nV30ikIAMuqN6fUG/WmSMEjuT3iQ69S917Oeo8QPtoXguykM6mqNwVB6gdoX2/GtIYAInhU1gEBRPhYTiFw0vUw9VuZBEC9EUAEDwEE4WORC5eTri8OKwgAd/hAvRFABA8BRPiosWyyn6FWCgJAHvVmTEuoNwUieOQXQI5oBuGjuZyuC1X/vWlZRKDm9eaIeqPeFEn2NF5b5eewZXhrHj6yFwiaFJ2PRreuF0MBNa030btuOd386s0H6s2SwcPD1wGF47Ttax/4ahk+srdxf+AcyL8gaAaghvXGeO98qfHtg8dY4uHrQO+Fsrk2wkfNvJt4k+wgjFkBC6gZby4fXL15WTPcEzy2CMOFCMe13ge1Cx/ZxWjMsT8wh43HBWpSb44kxtQPkvkf93o3u/llsCbqPP+jVuEj6/427rYYFz8A9Qb1JifpzW7MPbK6Z4HCcbpPahkE69bzYbhVMYzoDgfc9KLe5BY8DLcqntgntZx7U5vwka02MuZYL4zDViMBKlpvDqg36k3R2iDx8LWIJrIeKeGjoqzsIPED9Dt4bEkMtypivantPsmWdjXawP2p8JFzMYiTbtjxXTgHsnHRAFWh3hR0v9S43njQV2zDdXv7eeXDh6dQhWffAFWqNy9pCfWmKLJ3eozZ9YX3Up3e/VGHno8DiXGOhd4/ej+AinhZvVFvBC46sCWp0dC4OoQPT6FcHAHysF8TqDdFodejfPerden9qHT4yFYcGXY8F94BK5EA6g05mKhRvfFgr1ziuDwgfJSfp1AlCiCaAFBvcIPXvezldWN2d+nUYrROZcNHNq7TieeEA1BvqFu9UVPLaTgbLid8OPHI44RLC/iIZgDUG9Sbrh2wm0ur8r2oVQ4fE45fJxyAekOd6k32xmzzKEscHKs+8byS4SN7ojHs+FXAAdQbalZv9tm9jk/hw05jeQy9AspGj6164x4IAVL4kPpdNAFyMaYJ7LuiMOTKvZDwMQDZ+t2enpfX05oAUG/IQRUfVKqh1QmSY1X93dZU8Heq2s6aS7eZdPso+//47yh4w+n2YPb7jth/AK5X6k3t640aWq19OS18SP15mkq3Y6umzk8t9Q+zp2/RRfdSFQpD+vuMpb93JU84QL0poMl0O7HCenM4qcBE+yrVm2yFJD1xri/CxwCU/cSLi+DB9GI4u9xPSP/tXFY8JuNCmn58t+RFobJpH1BvCiTCxqEu6s2BCoSQkQrVG8GjWsaq+outtrMKYy4LHXtXUggWKQxxEX0i3d4q8T7c45oDqDd9rTfPpvXi2S7rzWRWbyZLvA+fdjxSVH87eamSgbJS4aPEy+ZFIdibXci7Fk+m0u1QhJmStoenN4B60x+zWb2Z6sUXy+pN1JpDJW2P4Qodlh7cVY/w4SLS1+Ax0+svnIWZg/YjgOtUFjye6FO9eauk9WbEMYl9KnzU6SLSt+BxVwAp3ROpbO4KgHrTu3rzbDZno5/1pnRDfiv0skGjBqqnkpPOqxY+fl2yn/doP4PHgoIQxWDKOQxQ23pzMKd6Ew+7ZkrWNqV/KV+20hUIHwMwXKKfdToLBbkVnuT2k6+yGHN6AupNz+pNng+gyjb8qgr1Rq9HNVXyXqhqS+2WKfnnOhQqutpvTTz+dnJ7WUQA6hM+cg0D0cOS1pvJ9D8POEwogqETryz651cfG0+u7hrXQMJHLZL/dB7d34uInpaXShLSrNoBCB/dm+pmOd0uHC1R+Pi147Ha1l08u+if33hEh9EgrNYEA3FsEN80m2hYlrkfxq8ClLfeROCZduPud6A7VXzXh/AxGIMMACc0P0A95DzXQ72B3qvcw9jKhI9bE4+XJfVP93Opw+V8f+cxQFf1Zqws9abm3x8QPvqqLOFjdpDfPAs+c/YnQOUNdMnbAc1tBIQP7vJ53QuS8AGQi6/VG0D4AADqogw97WN2EwgfAACA8AEAACB8AAAAwgcAACB8AAAACB8AAIDwAQAAIHwAAADCBwAAIHwAAAAIHwAAgPABAAAgfAAAAMIHAAAgfAAAAPTMGk0AAEA/DZ14JVl38ayGQM8HAAAgfAAAAMIHAACA8AEAAAgfAACA8AEAANBHltoFAKCvrj42ntx4ZKRQP9P17XvsGOEDAIDKhY9d4xqBBsOuAAAA4QMAABA+AAAAhA8AAED4AAAAhA8AAADhAwAAED4AAACEDwAAQPgAAACEDwAAAOEDAAAQPgAAAIQPAABA+AAAAIQPAAAA4QMAABA+AAAAFlqjCQAA6KcHPj2ZrLlyqVA/0/XtexobwgcAAFUKH385may7eLZYP9RT+4WPATDsCgAAED4AAADhAwAAQPgAAACEDwAAQPgAAADoH0vtAgDQV5f3vaERaNDzAQAACB8AAIDwAQAAIHwAAADCBwAAIHwAAAAIHwAAgPABAAAgfAAAAMIHAAAgfAAAAAgfAACA8AEAACB8AAAAwgcAACB8AAAA9MIaTQAAQJmtvj6frP3yszv+7ObWncmP6zZqHOEDAAC698CnJ5ON595P1l7+bNG/vzm0M5nf/Xxydde4xhI+AACou/UXTifrLp5NA8RfG70X0Ytxffue5PK+N1p+Tvybf/jwtcbntROh5KE/v55sPnM8+fK3v2+EEYQPAABqGDq2nH4nue/KFyv6vAge2977XePjcsX3+OUf/lvy1TOv6gURPgAAqIsIDQ+moSOGTHVi6E+vrCh4LBTf9+bWR/WADHL/awIAAPIS4aHT4LH54+Mt53csN/g8dOqf7AThAwCAqov5F52GhwgOG8693/XPEN+/0/CD8AEAQAnE5PBubvrXz57ueLjV3WICOoNhzgcAAH236cyxrj5/Y5tej3ifx1d7X01ubN+T3HflUvKLNKhEL0mrsBIT0KMHxNwP4QMAgIqJXo+llsX9YdPDyXc7RpNr6fbj/RsXDQut/Ntvf99YnrcZRCJUfDc82nZyegQU4UP4AACgYmJZ3XZi+duvR19s+UbydsElwkozeCwUweLb3c+37HGJ94qQP3M+AADoq1+0CR8RHOL9G62CRyN8/L11+Pi2zXs75n/zXMu/62bVLIQPAACKeLN5fb7tiwQjeCylXc/HjUV6PZoi0Fxv8fcrfbkhwgcAAAW39svWPQwxZCrmenQaXmJoVbsek9v/5lE7QfgAAKDulhMM2oWX69tHlvz8W23Cid4P4QMAgAppN2TqepshU736/HbWXLlkBwkfAABwW7tVqSyVK3wAAEDP3N+m52Op+SJLublVeBE+AAAgub0cbquXBC53yFW7npOlJqsjfAAAUCI3uuhdWHdxpvXXfWRkWV/D+zyEDwAAaqLdalPtJpMv9ffL6fmI4NFqRatuJ6sjfAAAUDDfb9rW8u/WX/iXln8XoWF9izejt3t54EIbz73f8u+6nS+C8AEAQMHETX6ruRXteiY2fPrPLb/mjWUEj/i6D3x6suXfX39Ez4fwAQBA5bQLC1s/fO2eSeURSja06bX4bsdo+xvc9OvF123n2vCoHTMAazQBAAD9FGGh1RCqCBq//MM/JvO7n2u88TxWp9r08fGWq1xFL8rVXeNtg8fQn15pO9E8Pt9KV8IHAAAVFL0McbPfKlDEEKkHT7+zrK/17e7nW4aO9bOnk81njrccyvVT+Hhs3E4RPgAAqKJmb0W7CeDL/Trzv3nunj8fOvHKkitnNcVEdStdDY45HwAA9N2VJ1/oeqhT9Hp08zXic7965lU7Q/gAAKDKGjf+ezu/8Y/eim/SANONr0dftMSu8AEAQB1c2zHaUc/DzaGdyb/99vddfe/53c+3nahOPsz5AAAgN42Vpu7fmDx06vWWE9AXih6PCB7dDLe68tT+rntNED4AgNaevjXx+JEB/wzDdgOLiR6QS9vfa7wEMLbFlsWNf/NtGlSu7ej8fRzNoV7dfA2EDwBgaWPZBoXUWLlq9/ONLTRXq4pekRhm1e3XjsnpsTKW93kIHwAAcIdulr+N93bceGQkDS4b0q8z0nV4QfgAAIDFw4eJ5KVhtSsAAED4AAAAhA8AAADhAwAAED4AAADhAwAAQPgAAACEDwAAAOEDAAAQPgAAAOEDAACgx9ZoAgAA6mLdxbPJxnPvJzeHHk2+efIFDSJ8AABAbz3w6clG6Fh7+bPG/0f4QPgAAICeWH19Ptn4f/+YPPCXk8l9V77QIMIHAAD0VgSNzWeOJ+tnTzcCCMIHAAD0VHM+x/oLpzWG8AEAAL1393wOhA8AAOgZ8zmEDwAA6CvzOYQPAADoq17N5/hx3cbk293PJ9/u+o8aVfgAAICf9Wo+x82hncl8Gjqu7hrXqMIHAADc1sv5HBE2rj42nlzfvkfDCh8AAHBbL+dzXHlqfzL/m+caw6wQPgAAoKEf7+f45skXNKzwAQAAt3k/h/ABAAB906v5HD9sejj5cd0GwUX4AACAO/VqPkdMHI8J5DGRfPPHx4UP4QMAAH724Ol3GsOrOhWTxq8NjzaWyo0lcxE+AABgUWsv/7Wjz4uhVfO7n2v0cli1SvgAAICei6FV0ctxbceoxhA+AIASmEy3Y5qBsmgOrfrmqRcaPR4IHwBAeXy+aur8tGagLGJo1ZUnXzC8SvgAAID+ignpsUUIidWsYugVwgcAAPRNvHgwtljVKuZ9RBihOlZrAgAAiibe3/HQn19P/t3/3td4n0c3LyRE+AAAoCauPLW/4x6MeCHhpjPHkof/z++SrR++lqy7eFaDlphhVwAA9FXM34gtVrLa8Ok/JxvOvd/RW87XXzjd2GI1rPhaq7p4UzrCBwAAFdYIDU++kMz/5rlk/ezpZPOZzoZTxefEkCyEDwAAaCuW022sapVuMYwqhlUZTlUP5nwAADAwMRzr8r43ki/+y3s9XdlqtSFZwgcAACwmhmR99cyryb/+1xONCerdvuV823u/awzNskpWsRh2BQBAYcSQrJgXElu87yNePBjL7q5U9Hw03xkSvSvxzpBrO0Y1sPABAAD3WjgvJEJIrHTVifj82KI3Jd6eHhPeI+QgfAAAwB2aS/XGEKqN5/7Y6M3oZE5HfH5Mbo8thnh5e3r+zPkAAKAUoufi69EXk0u/e6/xsZt5IWuuXNKgA6DnAwCAUokhUzGHI7bGvI6/nLRUr/ABAAD91ZwXEpPSY15IhBGKy7ArAABK7+bQzsY8jnhfSCzVa0J5Men5AACgMmIeSCzTGytarZ89nWw+c9y7PoQPAADon+j5WLhUb6xwZV6I8AEAAH3VWKp33xuNHpDoCTEvRPgAAIC+iiFZMS8klulddWNegwgfAADQX43J6CakD4TVrgAAAOEDAAAQPgAAAIQPAABA+AAAAIQPAAAA4QMAABA+AAAAhA8AAED4AAAAhA8AAADhAwAAKKM1mgAAgEG778oXyZorl376/5tbdyY/rtuoYYQPAADo3gOfnkx+ceF0cv/Fs8nq6/P3/P0Pmx5Ovtsxmszvfq7x3+2sj6/z5WfL/t7Xt+9pbAgfAABU2NrLnyUPnfqnxsd2ojdk47n3G9vXoy+mIeT5e/7N5o+PJxvSv18svLT11H7hQ/gAAKDqwWPoT6+sOCw8ePqdNIxcaoSQpof+/Hqj94TyMOEcAIBcRE9GJ8GjKXpAYnhViI+Ch/ABAACLip6KToNH05bT7zQ+bv74mAYVPgAA4F7rLp5tbN2K3pOY57HUfBGEDwAAaiqGTPXKhh5+LfJlwjkAAH0VQ62aczVaiZWnrj42/tOSumsv/zUNLH9s9HQs9vUQPgAA4B5rl3j/xlfPvJpc3TV+TxiJpXWXu6LVtR2jyTdP7k9uDu3U4MIHAAB11W6uR6PH467gcXcwWX2jfc9JBI8vf/t7DV0C5nwAANBXq9oMk1rsxYF3ix6Nbv4e4QMAgJqI+Rut3FjGW8ZjKFVzLsjdfly30VAr4QMAAJYW4WE5vt+0bfFgslXwED4AAKBHwQPhAwAAutKLXosbj4xoSOEDAABA+AAAAIQPAABA+AAAABA+AAAA4QMAAED4AAAAhA8AAED4AAAAED4AAADhAwAAED4AAACEDwAAoPzWaAIAAAZh7ZefJUMnXln2v13MA385mdz/95kVf++rj40nV3eN2wnCBwAAdbD6+nyy7uLZrr7GfVe+aGwrdeORETtgEPtcEwAAAMIHAAAgfAAAAAgfAACA8AEAANST1a4AAOirm0OPFu5n+n7TNjtG+AAAoGq+Hn1RI9Bg2BUAACB8AAAAwgcAAIDwAQAACB8AAEBNWe0KAOiLWxOPn0o/jBX951w1dX6VvQX50PMBAAAIHwAAgPABAAAgfAAAAMIHAAAgfAAAAAgfAACA8AEAACB8AAAABeEN5wAAlNq6i2eTtZf/mqy+8W3j/29s3Zn8sOnh5ObQTo0jfAAAwJ3WXv4sDQ/zyfebtjWCw3Js/vh4suHc+8nq6/OL/n18nauPjSffPPmCBhY+AACoqwgMD3x6srFF8LjbtR2jyXfpdnXX+KKf+w8fvtbo8WjnvitfJJvOHEvWX/iX5PJ/eiP5cd1GDS98AABQJ+svnE4eOvV6yx6L5r+J7Rfp9tXeV+8IDvG5SwWPhSLc/PIP/5j8v//8vwSQQYdOTQAAQF6ip2Prh6+1DR6LBZWmCB3xZysVvSDRW4LwAQBADUQPxEN/fn3FnxdhI0JL2Hju/Y6/fwSX5tdB+AAAoMIePP0/Ov7czWeON3pLOun1uPvrIHwAAFBh0euwknkad4thUw+efqfrnyO+TrcBhs6ZcA4AQN91M1yqqdWQqStP7U++Gx5Nfti0LVn75WeN79UuYMQk9lhNC+EDAIAKWqq3IV4IeG3Hv2/8d7wwcLm9E1+PvpjM737+p/+/vn1PY4u5Ja3CSjc9MAgfAAAU2FI3+1898+o97/OIyemxKlYMk2olXiK4MHjc/TXj+y72+fFnMX/Esrv5M+cDAIC+ip6MVq61eJFg9IREgGgnejja+a7N0KoYnoXwAQBA1W44b3zb8u++XSR4LAwX7QLGD5sfbvt9zesQPgAAqJn7/z7TcUBo9/c3tu5s+7k/3t96WFW73hiEDwAAKmapYVPh5tCjLf/u1hJzNmLoVsub4Da9MQgfAACA8AEAACB8AAAAwgcAACB8AAAACB8AAIDwAQAAIHwAAADCBwAAIHwAAAAIHwAAgPABAAAgfAAAALlbowkAABiEdRfPJo/8z//Q8ecPnXhFI5aMng8AAED4AAAAhA8AgCqY1gQgfFTZgwX4GYZL0E6zDhWA0hvTBEBVw8dcSX7OEeFD+ADIwdOD/Oa3Jh4ftguAyoaPVVPnZ0ryo44NuBhMOOwBulKWejPoh11jDhXgbpbaHVAASMPS1IC+/dP2AEDn0uv3XHodL8OPumXA9Wafo4Wmr0f/e7L6xnyhfqbvN20rQ9PNVO1YED4Gd0EeVDE4oPkB1Jt+SkPPlvRDWXraZyuwn6fT7XCRf8CbQzudjR341fi2uar9TlWbcF6WdHhgEGNh0+8ZwWNLSdroI5ccwA1rOetN6uUS7cvPHc4gfHSqTOkw1ycU2VOoww55gFqFj0HUmwg7LzlE3P9Qq+tMbcNHmXZSPI0ay7n4DJeofWYSADd7Zaw3bybl6WUP02U/GH81vk3NFD6EjwEpW9fpB1mPRF9lK1y9XLK28RQHKLKz6s2i9SZqjVUV1U2Ej9qEj7Il/ygEp/pZENKvHUstvlu2Hblq6vy0aw7gpqBU9SZCx5vqjXsgeqaS85EMuxq8kX4VhCx4nErK1f1d2aQPqDcVrjcHkhI+6KpYvRE+qme6ir9UpcJHiV40uFhB+CQLC70qBNH1/UkJg4fwAZSh3pT1pqAf9eZIFjzKWG+qdMNu1a7qqeT90OoK/k5lvZAMZwXhSDdPpWKVkXSL3o43S7wPLbMLqDfFrzcjWb0p80qKZyt0PE47JStl7lfj24QPJ18u4iJ+ISsKwysoAmPpFk+eLqTbmIIO4FrV53rzSQXqTWVu2LMVr0w6dz9beFV8w3kVnmI038lxOL3Az2QHYPxedyfg6Dbfk138h51wALmKXtoD6o0AWbD6abWx6lxfhA83rgMxkm11MbNq6rwnN4B6o96oN53dsAofri+FVrlhV+mFZDYxbMfJBpBPvZnVEqV1ooK/05TdWgmzVX5x5OqK/l5uYBUDADd71GrfZROUBWLHpvAxAMcct6U05+WCQMlYna+89aaqT5YFYvexwkfesguK5O+CCdDvehPXLfPU1JsiedvuLbVKD7mqbPhwI1tahlwB6g15qOyT5Wzolbmvjk3hw85jqaSfPUEEKBtPmstXb6YdkxTUpPBRUtnQK8lfWATIo97Magn1pkAMByzpfqvqW81rET4kf0kfIEdHNYF6UxTpDeyceyD3rcKH5E+bQpCtlw+g3qDeCFl1NJ2Gxmnho+SyN5dK/sVnyBWg3pCH2uyjbPiOAFIetek9XV2D3/GtxNOoQid97/YA1Btyqjd1mwt61DFZjmOzLr0etQgfnkZJ+gDqDXWsN1nvh2PSsSl8DICnUQVN+no9APWGHEzVuN44Jgt+bNap16M24SN7GuUJe/Ec1ARABeuNJ83Fc6iuv3i28tUhh0Ah1XLf1KXnIwpCJH/v/SiOo1a4Aipab44k3vuh3hQrgEymH6YdCsU7NuvwXo/aho+M5F8McaK9pRmACtOzq94U8Zg0/Ko4YpJ5LY/NWoWPbLyni1ABLoDZ0AQA9Qb1JgfZE3YPYYthLqnxA4rVNfydY+6H4VeD85ZJ5kCN6s2sZlBvChRAJpPbL8RksA7VcbhVbcNH9gRE1+NgzCQm/gP1qjfPaonB1Ju0/T3lX9zBxEPYQZrMQmBt1bHnI8leMuSilK9G6NP9Dag35FBvhL4WstWvPIQdUCh2Pahp+MgKQqTOSedBbg7W8M2yAM3VFtWbfOvNrGZoG0BmEosiDCIU783Cn/BR44IQJ96086HvDqVtbYwpUPd64wFMPsFDvVleAJkSQAQP4WMwnlUQ+moye+oHUHd71Zu+15tJzbCiABLtpUbnEzyc+8LHbdkcBAWhf4XAUxUA9Ua9KW4AiTkIQlv/HBI8hA8FQSEAUG/UG34OIAcFkJ5rTOyv+8pWwoeCoBAAqDfqDa0CiJXZehc89goewoeCkI+3FAIA9SYHR9WbngeQmP+hTXsTPJzbwsfyC0K6PZHofuzEQS91AlBvcri5i3pzRFP0JYBMZsHYykwrF4Fjh+AhfHRaFHQ/rqwQPGGVEQD1ps9m48ZYvel7AJmOup7omVuJRmiznK7w0W1BeCs7+Wa1RkuxTvgOLxAEUG9yqDdPqDe5BZDZdItj0lK87TUnlh8UPISPXhWEmawgOPnuPdni5YHPZmOXAVBv1JvqhZDolTMMa3HTcc6aWC589KMgzGVzGeLkm9Uit082Lw8EUG/6bEq9KUQAibq/QzC+MxCn7RLDrJynwkdfi8J0usXJd7SmTwDiBIsnTzHe1skG0Md6k9zuBal7vXlWvSlMAJlb0AtS56Fvk8nt3g5BTPjItSgcyZ4ATNYp4UfwSrcpRwBALrVmLqs3dVoRS70pfgiZzuaCHEzq1TsXDwT2ZnM7BGLhY2BF4WDFQ0icXPHUbYcub4CB1ZvZmtSbQ+pNqULIZLrtqEEIaYaOvdnwM7q0RhN0XxTixLs18XhcNF9Ot/3pNlzyXyu6U9+2lCFAIetNPBQ6kG4vpdsW9YZBh5AIxX87eal5TI5U5FeL3+uYwCF8FLkoRFfxkdjSwjCRhZCJEv0Kc80TzTKGAIUPIeoNRQ0hI1kImShhOI5z6+10mzK0SvgoW2GIcapTaVHYkp18+9JtrIAnYZxYkehPGFsLUJl6U8QgEvUmftaP1JvKh5AIlDEU62AaRBYek0UNIjPZvdAxbyYXPqpQFJpPd2JL0uIwloWQp7OPeZvLTrCP4qMnTgDqTR/Dxox6U/sgMpWFzoNZj8jCY3JQYWR24b2QHg7ho+rFYTo74JOsOMSJGNtwdjJuSXo3VnI6CxtnswIwY7lCAPWmx/VmLqsxzXoT33NWvWGRIDKTHSuNBQXSMDKcHYOx/To7Nnt9H5Rk3/Pz5r2Qt5ALH3UvDs0T8R7ZU6umVifj3F2f74I/OHs1gfYsuMmFN6MF5Nql3lCvMDKb/Dwcb1FpQFl2GDExHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYhP8vwACPIKO3Eb5sxwAAAABJRU5ErkJggg==";
+const MESES = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function todayISO(){ return new Date().toISOString().slice(0,10); }
+function fmt(d){ if(!d) return "—"; const [y,m,dd]=d.split("-"); return dd+"/"+m+"/"+y; }
+function daysBetween(a,b){ if(!a||!b) return null; return Math.round((new Date(b)-new Date(a))/86400000); }
+
+function calcProc(proc, templates){
+  const tpl = templates[proc.tipo]; const steps = tpl? tpl.steps : [];
+  const total = steps.length;
+  const etapas = proc.etapas||{};
+  const doneCount = steps.filter(s=> etapas[s.id] && etapas[s.id].done).length;
+  const pct = total? doneCount/total : 0;
+  const concluido = total>0 && doneCount===total;
+  const atrasado = !concluido && !!proc.prazo && proc.prazo < todayISO();
+  let status = "Não iniciado"; if(concluido) status="Concluído"; else if(doneCount>0) status="Em andamento";
+  const cor = concluido? C.ok : atrasado? C.danger : doneCount>0? C.warn : "#9c9488";
+  return {total,doneCount,pct,concluido,atrasado,status,cor};
+}
+
+/* ---------------- estado ---------------- */
+let session=null, isAdmin=false;
+let templates={}, setoresFull=[], filiaisList=[], processos=[], atestados=[], confMap={}, contratosPrazo=[], movimentacoes=[];
+let ui = {view:"dashboard", filtroTipo:"todos", filtroStatus:"todos", filtroSetor:"todos", filtroFilial:"todos", filtroMes:"todos", filtroAno:"todos", busca:"", selectedId:null, showNovo:false, configTipo:null, showImport:null, filtroAnoAfastamento:"", filtroMesAfastamento:""};
+let authMode = "login";
+function setorNomes(){ return setoresFull.map(s=>s.nome); }
+function setoresParaFilial(filial){
+  if(!filial) return setorNomes();
+  return setoresFull.filter(s=> !s.filiais || s.filiais.length===0 || s.filiais.includes(filial)).map(s=>s.nome);
+}
+function optsSetor(filial, selected){
+  return '<option value="">—</option>' + setoresParaFilial(filial).map(s=>`<option ${selected===s?'selected':''}>${esc(s)}</option>`).join("");
+}
+function optsFilial(selected){
+  return '<option value="">—</option>' + filiaisList.map(f=>`<option ${selected===f?'selected':''}>${esc(f)}</option>`).join("");
+}
+window.refreshSetorSelect = function(setorSelId, filial){
+  const sel = document.getElementById(setorSelId); if(!sel) return;
+  const current = sel.value;
+  sel.innerHTML = optsSetor(filial, current);
+};
+
+function render(){
+  const app = document.getElementById("app");
+  if(!session){ app.innerHTML = renderAuth(); return; }
+  app.innerHTML = `
+    <header style="background:${C.steel};padding:14px 20px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center">
+      <div class="flex gap8 center" style="gap:14px">
+        <div style="background:#fff;padding:6px 14px;border-radius:6px;display:inline-flex;align-items:center">
+          <img src="${LOGO_DATA_URI}" alt="Ollie" style="height:30px;display:block">
+        </div>
+        <div>
+          <p style="color:#fff;font-size:15px;margin:0;font-weight:600">Registro de Processos — Departamento Pessoal</p>
+          <p style="color:#FFE0D6;margin:2px 0 0;font-size:12px">${esc(session.user.email)} · ${isAdmin?"modo gestor":"modo time"}</p>
+        </div>
+      </div>
+      <div class="flex gap8">
+        <button class="primary" data-action="open-novo">+ Novo processo</button>
+        <button data-action="logout">Sair</button>
+      </div>
+    </header>
+    <nav class="tabs">
+      ${["dashboard:Dashboard","processos:Processos","afastamentos:Afastamentos","estagios:Estágio/Aprendiz","movimentacao:Movimentação","config:Checklists"].map(t=>{const [k,l]=t.split(":");return `<button class="${ui.view===k?'active':''}" data-action="set-view" data-view="${k}">${l}</button>`;}).join("")}
+    </nav>
+    <main style="padding:20px">${ui.view==="dashboard"?renderDashboard():ui.view==="processos"?renderProcessos():ui.view==="afastamentos"?renderAfastamentos():ui.view==="estagios"?renderEstagios():ui.view==="movimentacao"?renderMovimentacao():renderConfig()}</main>
+    ${ui.selectedId? renderDetail(): ""}
+    ${ui.showNovo? renderNovoModal(): ""}
+  `;
+  if(ui.view==="processos") wireSearch();
+}
+
+function renderAuth(){
+  return `<div style="max-width:360px;margin:60px auto" class="card">
+    <img src="${LOGO_DATA_URI}" alt="Ollie" style="height:34px;display:block;margin-bottom:16px">
+    <h2 style="margin:0 0 4px">Registro de Processos</h2>
+    <p class="muted" style="margin:0 0 16px">Departamento Pessoal</p>
+    <div class="flex" style="flex-direction:column;gap:10px">
+      <input id="authEmail" placeholder="E-mail" type="email">
+      <input id="authPass" placeholder="Senha" type="password">
+    </div>
+    <p id="authError" style="color:${C.danger};font-size:12px;min-height:16px;margin:8px 0 0"></p>
+    <div class="flex gap8" style="margin-top:8px">
+      <button class="primary" style="flex:1" data-action="${authMode==='login'?'do-login':'do-signup'}">${authMode==='login'?'Entrar':'Criar conta'}</button>
+    </div>
+    <button class="link" style="margin-top:10px;font-size:12px" data-action="toggle-auth">${authMode==='login'?'Ainda não tenho conta — criar':'Já tenho conta — entrar'}</button>
+  </div>`;
+}
+
+/* ---------------- dashboard ---------------- */
+function renderDashboard(){
+  const withCalc = processos.map(p=>({p,c:calcProc(p,templates)}));
+  const ativos = withCalc.filter(x=>!x.c.concluido);
+  const atrasados = withCalc.filter(x=>x.c.atrasado);
+  const mesAtual = todayISO().slice(0,7);
+  const concluidosMes = withCalc.filter(x=>x.c.concluido && x.p.data_conclusao && x.p.data_conclusao.slice(0,7)===mesAtual).length;
+  const progressoMedio = ativos.length? Math.round(ativos.reduce((a,x)=>a+x.c.pct,0)/ativos.length*100):0;
+  const concCom = withCalc.filter(x=>x.c.concluido && x.p.data_abertura && x.p.data_conclusao);
+  const tempoMedio = concCom.length? Math.round(concCom.reduce((a,x)=>a+daysBetween(x.p.data_abertura,x.p.data_conclusao),0)/concCom.length):null;
+  const porTipo = Object.keys(templates).map(t=>{
+    const doTipo = withCalc.filter(x=>x.p.tipo===t); if(!doTipo.length) return null;
+    const emdia=doTipo.filter(x=>!x.c.concluido&&!x.c.atrasado).length, atr=doTipo.filter(x=>x.c.atrasado).length, conc=doTipo.filter(x=>x.c.concluido).length;
+    return {label:templates[t].label, emdia, atr, conc, tot:emdia+atr+conc};
+  }).filter(Boolean);
+  const hoje = todayISO();
+  const emAviso = processos.filter(p=> p.data_inicio_aviso && p.data_fim_aviso && hoje>=p.data_inicio_aviso && hoje<=p.data_fim_aviso);
+  return `
+  <div class="grid4" style="margin-bottom:20px">
+    <button class="card" style="border:none;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(255,80,44,0.05)'" onmouseout="this.style.background='var(--card)'" onclick="ui.filtroStatus='nao_iniciado'; ui.view='processos'; render()">
+      <p class="muted">Processos ativos</p><p style="font-size:26px;font-weight:600;margin:4px 0 0">${ativos.length}</p>
+      <p style="font-size:11px;color:var(--steel);margin:6px 0 0">👆 clique para filtrar</p>
+    </button>
+    <button class="card" style="border:none;cursor:pointer;transition:all 0.2s;border-color:${atrasados.length?C.danger:'inherit'}" onmouseover="this.style.background='rgba(231,0,42,0.05)'" onmouseout="this.style.background='var(--card)'" onclick="ui.filtroStatus='atrasado'; ui.view='processos'; render()">
+      <p class="muted">Atrasados</p><p style="font-size:26px;font-weight:600;margin:4px 0 0;color:${atrasados.length?C.danger:'inherit'}">${atrasados.length}</p>
+      <p style="font-size:11px;color:${atrasados.length?C.danger:C.ok};margin:6px 0 0">${atrasados.length?'⚠ clique':'✓ nenhum'}</p>
+    </button>
+    <button class="card" style="border:none;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(31,138,82,0.05)'" onmouseout="this.style.background='var(--card)'" onclick="ui.filtroStatus='concluido'; ui.view='processos'; render()">
+      <p class="muted">Concluídos este mês</p><p style="font-size:26px;font-weight:600;margin:4px 0 0">${concluidosMes}</p>
+      <p style="font-size:11px;color:var(--ok);margin:6px 0 0">👆 clique para filtrar</p>
+    </button>
+    <div class="card">
+      <p class="muted">Tempo médio de conclusão</p><p style="font-size:26px;font-weight:600;margin:4px 0 0">${tempoMedio==null?"—":tempoMedio+" dias"}</p>
+      <p style="font-size:11px;color:var(--muted);margin:6px 0 0">📊 ${concCom.length} processos</p>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:20px">
+    <p class="muted" style="margin:0 0 10px">Processos por tipo</p>
+    ${porTipo.map(r=>`<div style="margin-bottom:10px"><div class="flex between" style="font-size:12px;margin-bottom:3px"><span>${esc(r.label)}</span><span class="muted">${r.tot}</span></div><div class="stackbar"><div style="width:${r.emdia/r.tot*100}%;background:${C.warn}"></div><div style="width:${r.atr/r.tot*100}%;background:${C.danger}"></div><div style="width:${r.conc/r.tot*100}%;background:${C.ok}"></div></div></div>`).join("") || '<p class="muted">Sem processos ainda.</p>'}
+  </div>
+  <div class="card" style="margin-bottom:20px">
+    <p class="muted" style="margin:0 0 10px">Cumprindo aviso prévio agora</p>
+    ${emAviso.length===0? '<p class="muted">Ninguém em aviso prévio no momento.</p>' : emAviso.map(p=>`<button data-action="open-detail" data-id="${p.id}" style="width:100%;text-align:left;display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>${esc(p.colaborador)}${p.setor?(' · '+esc(p.setor)):''}${p.filial?(' · '+esc(p.filial)):''}</span><span class="muted">${daysBetween(hoje,p.data_fim_aviso)} dia(s) restantes</span></button>`).join("")}
+  </div>
+  <div class="card">
+    <p class="muted" style="margin:0 0 10px">Precisa de atenção</p>
+    ${atrasados.length===0? '<p class="muted">Nenhum processo atrasado.</p>' : atrasados.map(({p})=>`<button data-action="open-detail" data-id="${p.id}" style="width:100%;text-align:left;display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>⚠ ${esc(p.colaborador)} · ${esc(templates[p.tipo].label)}</span><span class="muted">prazo era ${fmt(p.prazo)}</span></button>`).join("")}
+  </div>`;
+}
+
+/* ---------------- processos ---------------- */
+function filteredProcessos(){
+  return processos.filter(p=>{
+    if(ui.filtroTipo!=="todos" && p.tipo!==ui.filtroTipo) return false;
+    if(ui.filtroFilial!=="todos" && p.filial!==ui.filtroFilial) return false;
+    if(ui.filtroSetor!=="todos" && p.setor!==ui.filtroSetor) return false;
+    const st = calcProc(p,templates).status;
+    if(ui.filtroStatus!=="todos" && st!==ui.filtroStatus) return false;
+    if(ui.filtroAno!=="todos" && (!p.data_abertura || p.data_abertura.slice(0,4)!==ui.filtroAno)) return false;
+    if(ui.filtroMes!=="todos" && (!p.data_abertura || p.data_abertura.slice(5,7)!==ui.filtroMes)) return false;
+    if(ui.busca && !p.colaborador.toLowerCase().includes(ui.busca.toLowerCase())) return false;
+    return true;
+  });
+}
+function anosDisponiveis(){ return Array.from(new Set(processos.filter(p=>p.data_abertura).map(p=>p.data_abertura.slice(0,4)))).sort(); }
+function renderProcessos(){
+  const list = filteredProcessos(); const anos = anosDisponiveis();
+  const filialParaSetor = ui.filtroFilial==="todos"? null : ui.filtroFilial;
+  return `
+  <div class="flex wrap gap8" style="margin-bottom:14px">
+    <select data-action-change="filtroTipo"><option value="todos">Todos os tipos</option>${Object.entries(templates).map(([k,v])=>`<option value="${k}" ${ui.filtroTipo===k?'selected':''}>${esc(v.label)}</option>`).join("")}</select>
+    <select data-action-change="filtroStatus"><option value="todos">Todos os status</option>${["Não iniciado","Em andamento","Concluído"].map(s=>`<option ${ui.filtroStatus===s?'selected':''}>${s}</option>`).join("")}</select>
+    <select data-action-change="filtroFilial"><option value="todos">Todas as filiais</option>${filiaisList.map(f=>`<option ${ui.filtroFilial===f?'selected':''}>${esc(f)}</option>`).join("")}</select>
+    <select data-action-change="filtroSetor"><option value="todos">Todos os setores</option>${setoresParaFilial(filialParaSetor).map(s=>`<option ${ui.filtroSetor===s?'selected':''}>${esc(s)}</option>`).join("")}</select>
+    <select data-action-change="filtroMes"><option value="todos">Todos os meses</option>${MESES.map((m,i)=>{const mm=String(i+1).padStart(2,'0');return `<option value="${mm}" ${ui.filtroMes===mm?'selected':''}>${m}</option>`;}).join("")}</select>
+    <select data-action-change="filtroAno"><option value="todos">Todos os anos</option>${anos.map(a=>`<option ${ui.filtroAno===a?'selected':''}>${a}</option>`).join("")}</select>
+    <input id="buscaInput" placeholder="Buscar colaborador..." value="${esc(ui.busca)}" style="flex:1;min-width:160px">
+  </div>
+  <div class="card" style="padding:0;overflow:auto">
+    <table><thead><tr><th>Tipo</th><th>Colaborador</th><th>Filial</th><th>Setor</th><th>Progresso</th><th>Status</th><th>Prazo</th></tr></thead>
+    <tbody id="procTbody">
+    ${list.map(p=>{ const c=calcProc(p,templates); return `<tr data-row-colab="${esc(p.colaborador.toLowerCase())}" data-action="open-detail" data-id="${p.id}" style="cursor:pointer">
+      <td>${esc(templates[p.tipo]?templates[p.tipo].label:p.tipo)}</td><td>${esc(p.colaborador)}</td><td>${esc(p.filial||"—")}</td><td>${esc(p.setor||"—")}</td>
+      <td><div class="flex gap8 center"><div class="bar"><div style="width:${c.pct*100}%;background:${c.cor}"></div></div><span class="muted" style="font-size:12px">${c.doneCount}/${c.total}</span></div></td>
+      <td><span class="tag" style="border-color:${c.cor};color:${c.cor}">${c.atrasado?"Atrasado":c.status}</span></td><td class="muted">${fmt(p.prazo)}</td></tr>`;}).join("") || '<tr><td colspan="7" class="muted" style="text-align:center;padding:24px">Nenhum processo encontrado.</td></tr>'}
+    </tbody></table>
+  </div>`;
+}
+function wireSearch(){
+  const input = document.getElementById("buscaInput"); if(!input) return;
+  input.addEventListener("input", ()=>{ ui.busca=input.value; const q=ui.busca.toLowerCase();
+    document.querySelectorAll("#procTbody tr[data-row-colab]").forEach(tr=>tr.classList.toggle("hidden", !tr.dataset.rowColab.includes(q)));
+  });
+}
+
+/* ---------------- detalhe ---------------- */
+function renderDetail(){
+  const p = processos.find(x=>x.id===ui.selectedId); if(!p) return "";
+  const tpl = templates[p.tipo]; const conf = confMap[p.id] || "";
+  return `<div class="overlay" data-action="close-detail-bg"><div class="panel">
+    <div class="flex between" style="margin-bottom:2px"><div><p class="muted" style="margin:0;font-size:12px">${esc(tpl.label)}</p><h2 style="margin:2px 0;font-size:18px">${esc(p.colaborador)}</h2></div><button class="link" data-action="close-detail">✕</button></div>
+    <div class="flex wrap gap8" style="font-size:13px;margin-bottom:14px">
+      <span class="muted">Aberto em ${fmt(p.data_abertura)}</span>
+      <label>Prazo <input type="date" value="${p.prazo||''}" onchange="setPrazo('${p.id}', this.value)"></label>
+      <label>Filial <select id="detFilial" onchange="setFilial('${p.id}', this.value); refreshSetorSelect('detSetor', this.value)">${optsFilial(p.filial)}</select></label>
+      <label>Setor <select id="detSetor" onchange="setSetor('${p.id}', this.value)">${optsSetor(p.filial, p.setor)}</select></label>
+    </div>
+    ${p.tipo.startsWith("rescisao")? `
+    <div class="flex wrap gap8" style="font-size:13px;margin-bottom:14px;background:var(--paper);padding:8px;border:1px solid var(--line)">
+      <b style="width:100%;font-size:12px">Aviso prévio</b>
+      <label>Início <input type="date" value="${p.data_inicio_aviso||''}" onchange="setAviso('${p.id}','data_inicio_aviso',this.value)"></label>
+      <label>Fim <input type="date" value="${p.data_fim_aviso||''}" onchange="setAviso('${p.id}','data_fim_aviso',this.value)"></label>
+      ${p.data_inicio_aviso && p.data_fim_aviso && todayISO()>=p.data_inicio_aviso && todayISO()<=p.data_fim_aviso? `<span class="tag" style="border-color:${C.warn};color:${C.warn}">Cumprindo aviso — ${daysBetween(todayISO(),p.data_fim_aviso)} dia(s) restantes</span>`:""}
+    </div>` : ""}
+    <div style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:14px">
+      ${tpl.steps.map(s=>{ const et=(p.etapas&&p.etapas[s.id])||{done:false,em:null,obs:""}; const dur = et.done? daysBetween(p.data_abertura, et.em): null;
+        return `<div style="border-bottom:1px solid var(--line);padding:8px 0">
+          <button data-action="toggle-step" data-id="${p.id}" data-step="${s.id}" style="width:100%;text-align:left;display:flex;gap:8px;align-items:flex-start">
+            <span style="font-size:15px">${et.done?'☑':'☐'}</span>
+            <span style="flex:1;${et.done?'text-decoration:line-through;color:var(--muted)':''}">${esc(s.label)}${et.done?`<br><span class="muted" style="font-size:11px;text-decoration:none">concluído em ${fmt(et.em)}${dur!=null?(' · '+dur+' dia(s) após abertura'):''}</span>`:''}</span>
+          </button>
+          <input placeholder="Observação da etapa..." value="${esc(et.obs)}" style="width:100%;margin-top:4px;font-size:12px" onchange="setObs('${p.id}','${s.id}', this.value)">
+        </div>`;}).join("")}
+    </div>
+    ${isAdmin? `<div style="margin-bottom:14px"><label class="muted" style="font-size:12px">🔒 Informações confidenciais (valores, CID etc.)</label>
+      <textarea rows="3" style="width:100%;margin-top:4px" onchange="setConf('${p.id}', this.value)">${esc(conf)}</textarea></div>`
+      : (conf? '<p class="muted" style="font-size:12px">🔒 Há informações confidenciais neste processo (visíveis só para o gestor).</p>':"")}
+    <button class="link" style="color:${C.danger}" data-action="remove-processo" data-id="${p.id}">Excluir processo</button>
+  </div></div>`;
+}
+
+function renderNovoModal(){
+  return `<div class="overlay" data-action="close-novo-bg"><div class="modal">
+    <div class="flex between" style="margin-bottom:12px"><h2 style="margin:0;font-size:17px">Novo processo</h2><button class="link" data-action="close-novo">✕</button></div>
+    <div class="flex" style="flex-direction:column;gap:10px">
+      <label>Tipo <select id="novoTipo">${Object.entries(templates).map(([k,v])=>`<option value="${k}">${esc(v.label)}</option>`).join("")}</select></label>
+      <label>Colaborador / referência <input id="novoColab" placeholder="Nome"></label>
+      <label>Filial <select id="novoFilial" onchange="refreshSetorSelect('novoSetor', this.value)">${optsFilial("")}</select></label>
+      <label>Setor <select id="novoSetor">${optsSetor(null,"")}</select></label>
+      <label>Data de abertura <input type="date" id="novoAbertura" value="${todayISO()}"></label>
+      <label>Prazo (opcional) <input type="date" id="novoPrazo"></label>
+    </div>
+    <div class="flex gap8" style="justify-content:flex-end;margin-top:16px"><button data-action="close-novo">Cancelar</button><button class="primary" data-action="criar-processo">Criar processo</button></div>
+  </div></div>`;
+}
+
+/* ---------------- afastamentos ---------------- */
+function processoAfastamentoDe(colaborador){
+  const nome = (colaborador||"").toLowerCase();
+  return processos.find(p=> p.tipo==="afastamento" && (p.colaborador||"").toLowerCase()===nome) || null;
+}
+function contagemPor(list, chave){
+  const map = {};
+  list.forEach(a=>{ const k = a[chave] || "—"; if(!map[k]) map[k] = {chave:k, qtd:0, dias:0}; map[k].qtd++; map[k].dias += (a.dias||0); });
+  return Object.values(map).sort((a,b)=>b.qtd-a.qtd);
+}
+function renderBarList(rows, corBarra, sufixo){
+  if(!rows.length) return '<p class="muted" style="font-size:13px">Sem dados ainda.</p>';
+  const max = Math.max(...rows.map(r=>r.qtd));
+  return rows.map(r=>`
+    <div style="margin-bottom:8px">
+      <div class="flex between" style="font-size:12px;margin-bottom:2px"><span>${esc(r.chave)}</span><span class="muted">${r.qtd} atestado(s)${sufixo?(' · '+r.dias+' dia(s)'):''}</span></div>
+      <div class="stackbar"><div style="width:${(r.qtd/max*100)}%;background:${corBarra}"></div></div>
+    </div>`).join("");
+}
+function renderAfastamentos(){
+  if(!isAdmin) return `<div class="card"><p class="muted">O controle de afastamentos envolve CID (dado de saúde) — disponível só para gestores. Peça pro seu gestor te adicionar na tabela "admins" no Supabase se precisar de acesso.</p></div>`;
+  
+  // Calcular filtros de período
+  const anosAtestados = Array.from(new Set(atestados.map(a=>a.data_inicio.slice(0,4)))).sort().reverse();
+  const mesAtualStr = todayISO().slice(0,7);
+  const anoFiltro = ui.filtroAnoAfastamento || mesAtualStr.slice(0,4);
+  const mesFiltro = ui.filtroMesAfastamento || mesAtualStr.slice(5,7);
+  const mesAnoSelecionado = `${anoFiltro}-${mesFiltro}`;
+  
+  // Filtrar atestados pelo período
+  const atestadosFiltrados = atestados.filter(a=> a.data_inicio.slice(0,7) <= mesAnoSelecionado && a.data_fim.slice(0,7) >= mesAnoSelecionado);
+  
+  const alerts = computeAlertas(atestadosFiltrados);
+  const proximos = atestadosFiltrados.filter(a=>a.dias>=10 && a.dias<=15);
+  const acima = atestadosFiltrados.filter(a=>a.dias>15);
+  const porCid = contagemPor(atestadosFiltrados, "cid");
+  const porSetor = contagemPor(atestadosFiltrados, "setor");
+  const porFilial = contagemPor(atestadosFiltrados, "filial");
+  
+  // Calcular evolução mensal
+  const evolucao = calcularEvolucaoMensal(atestados);
+  const topColaboradores = calcularTopColaboradores(atestados, 10);
+  
+  return `
+  <!-- Filtro de Período -->
+  <div class="card" style="margin-bottom:16px;background:linear-gradient(135deg, rgba(255,80,44,0.05), rgba(219,168,229,0.05))">
+    <p style="margin:0 0 10px;font-weight:600">📅 Filtrar por período</p>
+    <div class="flex wrap gap8" style="align-items:center">
+      <select data-action-change="filtroAnoAfastamento" style="min-width:120px">
+        <option value="">— Todos os anos —</option>
+        ${anosAtestados.map(a=>`<option ${a===anoFiltro?'selected':''}>${a}</option>`).join("")}
+      </select>
+      <select data-action-change="filtroMesAfastamento" style="min-width:140px">
+        <option value="">— Todos os meses —</option>
+        <option ${mesFiltro==='01'?'selected':''} value="01">Janeiro</option>
+        <option ${mesFiltro==='02'?'selected':''} value="02">Fevereiro</option>
+        <option ${mesFiltro==='03'?'selected':''} value="03">Março</option>
+        <option ${mesFiltro==='04'?'selected':''} value="04">Abril</option>
+        <option ${mesFiltro==='05'?'selected':''} value="05">Maio</option>
+        <option ${mesFiltro==='06'?'selected':''} value="06">Junho</option>
+        <option ${mesFiltro==='07'?'selected':''} value="07">Julho</option>
+        <option ${mesFiltro==='08'?'selected':''} value="08">Agosto</option>
+        <option ${mesFiltro==='09'?'selected':''} value="09">Setembro</option>
+        <option ${mesFiltro==='10'?'selected':''} value="10">Outubro</option>
+        <option ${mesFiltro==='11'?'selected':''} value="11">Novembro</option>
+        <option ${mesFiltro==='12'?'selected':''} value="12">Dezembro</option>
+      </select>
+      <span class="muted" style="flex:1;text-align:right;font-size:12px">${atestadosFiltrados.length} atestados no período</span>
+    </div>
+  </div>
+  
+  <div class="grid4" style="margin-bottom:16px">
+    <div class="card"><p class="muted">Total no período</p><p style="font-size:24px;font-weight:600;margin:4px 0 0">${atestadosFiltrados.length}</p></div>
+    <div class="card"><p class="muted">Próximos de 15 dias (10–15)</p><p style="font-size:24px;font-weight:600;margin:4px 0 0;color:${proximos.length?C.warn:'inherit'}">${proximos.length}</p></div>
+    <div class="card"><p class="muted">Acima de 15 dias</p><p style="font-size:24px;font-weight:600;margin:4px 0 0;color:${acima.length?C.danger:'inherit'}">${acima.length}</p></div>
+    <div class="card"><p class="muted">CIDs distintos</p><p style="font-size:24px;font-weight:600;margin:4px 0 0">${porCid.length}</p></div>
+  </div>
+  
+  <div class="flex wrap gap8" style="margin-bottom:16px">
+    <div class="card" style="flex:1;min-width:240px"><p class="muted" style="margin:0 0 10px">Atestados por CID</p>${renderBarList(porCid.slice(0,8), C.steel, true)}</div>
+    <div class="card" style="flex:1;min-width:240px"><p class="muted" style="margin:0 0 10px">Atestados por setor</p>${renderBarList(porSetor.slice(0,8), C.accent, false)}</div>
+    <div class="card" style="flex:1;min-width:240px"><p class="muted" style="margin:0 0 10px">Atestados por filial</p>${renderBarList(porFilial.slice(0,8), C.ok, false)}</div>
+  </div>
+  
+  <!-- Evolução Mensal -->
+  <div class="card" style="margin-bottom:16px">
+    <p style="margin:0 0 10px;font-weight:600">📈 Evolução mensal de atestados</p>
+    <div style="display:flex;align-items:flex-end;gap:4px;height:180px;padding:10px 0;border-bottom:2px solid var(--line)">
+      ${evolucao.map((m,i)=>`
+        <button onclick="console.log('${m.mes}: ${m.total} atestados')" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-height:100px;border:none;background:none;cursor:pointer;padding:0">
+          <div style="width:100%;background:linear-gradient(to top, ${C.steel}, ${C.accent});height:${Math.max(m.total*15,10)}px;border-radius:3px 3px 0 0;opacity:0.8;transition:opacity 0.2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8" title="${m.mes}: ${m.total} atestados"></div>
+          <span style="font-size:10px;margin-top:6px;color:var(--muted)">${m.mes.slice(5)}</span>
+        </button>
+      `).join("")}
+    </div>
+  </div>
+  
+  <!-- Top 10 Colaboradores -->
+  <div class="card" style="margin-bottom:16px">
+    <p style="margin:0 0 10px;font-weight:600">🏆 Top 10 colaboradores com mais atestados</p>
+    <div style="display:grid;gap:8px">
+      ${topColaboradores.map((c,i)=>`
+        <div style="display:flex;align-items:center;gap:10px;padding:8px;background:rgba(255,80,44,0.03);border-radius:4px">
+          <span style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:${C.steel};color:#fff;font-weight:600;border-radius:50%;font-size:12px">${i+1}</span>
+          <span style="flex:1"><b>${esc(c.colaborador)}</b><br><span class="muted" style="font-size:12px">${c.total} atestados (${c.dias} dias)</span></span>
+          <span style="font-weight:600;color:${c.dias>30?C.danger:C.warn}">${c.dias} dias</span>
+        </div>
+      `).join("")}
+    </div>
+  </div>
+  
+  ${alerts.length? `<div class="card" style="border-color:${C.danger};margin-bottom:16px"><p style="margin:0 0 8px;font-weight:600;color:${C.danger}">⚠ Alertas de afastamento por INSS</p>
+    ${alerts.map(a=>`<div style="border-bottom:1px solid var(--line);padding:8px 0" class="flex between wrap gap8">
+      <div><b>${esc(a.colaborador)}</b> <span class="muted">(CID ${esc(a.cid)}${a.setor?(' · '+esc(a.setor)):''})</span><br><span class="muted" style="font-size:12px">${esc(a.detalhe)}</span></div>
+      <button data-action="abrir-afastamento" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}" data-cid="${esc(a.cid)}" data-motivo="${a.motivo}">Abrir processo de afastamento</button>
+    </div>`).join("")}</div>` : `<div class="card" style="margin-bottom:16px"><p class="muted">Nenhum alerta no momento.</p></div>`}
+  
+  <div class="card" style="margin-bottom:16px"><p style="margin:0 0 10px;font-weight:600">Registrar atestado</p>
+    <div class="flex wrap gap8">
+      <input id="atColab" placeholder="Colaborador" style="flex:1;min-width:160px">
+      <select id="atFilial" onchange="refreshSetorSelect('atSetor', this.value)">${optsFilial("")}</select>
+      <select id="atSetor">${optsSetor(null,"")}</select>
+      <input id="atCid" placeholder="CID" style="width:100px">
+      <input type="date" id="atInicio" title="Início"><input type="date" id="atFim" title="Fim">
+      <input id="atObs" placeholder="Observação" style="flex:1;min-width:140px">
+      <button class="primary" data-action="add-atestado">Adicionar</button>
+      <button data-action="open-import" data-import="atestados">Importar CSV</button>
+    </div>
+  </div>
+  ${ui.showImport==="atestados"? renderImportModal("atestados") : ""}
+  <div class="card" style="padding:0;overflow:auto"><table><thead><tr><th>Colaborador</th><th>Filial</th><th>Setor</th><th>CID</th><th>Início</th><th>Fim</th><th>Dias</th><th>Processo</th><th></th></tr></thead>
+  <tbody>${atestadosFiltrados.slice().sort((a,b)=>b.data_inicio.localeCompare(a.data_inicio)).map(a=>{
+    const proc = processoAfastamentoDe(a.colaborador);
+    return `<tr><td>${esc(a.colaborador)}</td><td>${esc(a.filial||"—")}</td><td>${esc(a.setor||"—")}</td><td>${esc(a.cid)}</td><td>${fmt(a.data_inicio)}</td><td>${fmt(a.data_fim)}</td><td style="${a.dias>15?('color:'+C.danger+';font-weight:600'):(a.dias>=10?('color:'+C.warn):'')}">${a.dias}</td>
+    <td>${proc? `<button class="link" data-action="open-detail" data-id="${proc.id}">ver processo</button>` : `<button class="link" data-action="abrir-afastamento" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}" data-cid="${esc(a.cid)}" data-motivo="manual">abrir processo</button>`}</td>
+    <td><button class="link" data-action="remove-atestado" data-id="${a.id}">excluir</button></td></tr>`;
+  }).join("") || '<tr><td colspan="9" class="muted" style="text-align:center;padding:20px">Nenhum atestado registrado.</td></tr>'}</tbody></table></div>`;
+}
+function calcularEvolucaoMensal(list){
+  const meses = {};
+  const agora = new Date();
+  for(let i=11; i>=0; i--){
+    const d = new Date(agora);
+    d.setMonth(d.getMonth()-i);
+    const mes = d.toISOString().slice(0,7);
+    meses[mes] = 0;
+  }
+  list.forEach(a=>{
+    const mes = a.data_inicio.slice(0,7);
+    if(mes in meses) meses[mes]++;
+  });
+  return Object.entries(meses).map(([mes, total])=>({mes, total}));
+}
+function calcularTopColaboradores(list, limite){
+  const byColab = {};
+  list.forEach(a=>{
+    if(!byColab[a.colaborador]) byColab[a.colaborador] = {total:0, dias:0};
+    byColab[a.colaborador].total++;
+    byColab[a.colaborador].dias += a.dias;
+  });
+  return Object.entries(byColab)
+    .map(([colaborador, data])=>({colaborador, ...data}))
+    .sort((a,b)=>b.dias-a.dias)
+    .slice(0, limite);
+}
+function computeAlertas(list){
+  const alerts=[]; const byKey={};
+  list.forEach(a=>{ const k=a.colaborador+"|"+a.cid; (byKey[k]=byKey[k]||[]).push(a); });
+  Object.values(byKey).forEach(items=>{
+    items.sort((a,b)=>a.data_inicio.localeCompare(b.data_inicio));
+    items.forEach(a=>{ if(a.dias>15) alerts.push({colaborador:a.colaborador,setor:a.setor,cid:a.cid,motivo:"individual",detalhe:`Atestado de ${a.dias} dias — acima de 15, gera afastamento por INSS.`}); });
+    for(let i=0;i<items.length;i++){
+      const ref=items[i]; const refEnd=new Date(ref.data_fim); const ws=new Date(refEnd); ws.setDate(ws.getDate()-59); const wsStr=ws.toISOString().slice(0,10);
+      const involved=items.filter(x=>x.data_inicio>=wsStr && x.data_inicio<=ref.data_fim);
+      const soma=involved.reduce((s,x)=>s+x.dias,0);
+      if(soma>15 && involved.length>1){
+        const dup = alerts.some(al=>al.motivo==="acumulo"&&al.colaborador===ref.colaborador&&al.cid===ref.cid&&al._n===involved.length);
+        if(!dup) alerts.push({colaborador:ref.colaborador,setor:ref.setor,cid:ref.cid,motivo:"acumulo",detalhe:`Soma de ${soma} dias em atestados com o mesmo CID, em até 60 dias.`,_n:involved.length});
+      }
+    }
+  });
+  return alerts;
+}
+
+/* ---------------- estágio / aprendiz ---------------- */
+const LIMITE_DIAS_CONTRATO = 730; // 2 anos
+const AVISO_DIAS_LIMITE = 630;    // ~21 meses, começa a alertar
+const AVISO_VENCIMENTO = 30;      // dias antes do fim previsto para alertar
+function computeAlertasContrato(list){
+  const hoje = todayISO();
+  const alerts = [];
+  list.forEach(c=>{
+    const diasRestantes = daysBetween(hoje, c.data_fim_prevista);
+    const diasTotais = daysBetween(c.data_inicio, hoje);
+    if(diasRestantes<0){
+      alerts.push({...c, motivo:"vencido", detalhe:`Contrato venceu há ${-diasRestantes} dia(s) — regularizar (efetivar ou desligar).`});
+    } else if(diasRestantes<=AVISO_VENCIMENTO){
+      alerts.push({...c, motivo:"vencendo", detalhe:`Contrato vence em ${diasRestantes} dia(s) (${fmt(c.data_fim_prevista)}).`});
+    }
+    if(diasTotais>=LIMITE_DIAS_CONTRATO){
+      const rotulo = c.tipo==="estagio"? "estágio (Lei 11.788/2008)" : "aprendizagem (Art. 428 da CLT)";
+      alerts.push({...c, motivo:"limite-legal", detalhe:`Já passou de 2 anos de ${rotulo} — limite legal ultrapassado, regularizar imediatamente.`});
+    } else if(diasTotais>=AVISO_DIAS_LIMITE){
+      const rotulo = c.tipo==="estagio"? "estágio" : "aprendizagem";
+      alerts.push({...c, motivo:"perto-limite", detalhe:`Está com ${diasTotais} dias de ${rotulo} — se aproximando do limite legal de 2 anos.`});
+    }
+  });
+  return alerts;
+}
+function renderEstagios(){
+  const alerts = computeAlertasContrato(contratosPrazo);
+  const ordemGravidade = {"limite-legal":0,"vencido":1,"perto-limite":2,"vencendo":3};
+  alerts.sort((a,b)=>ordemGravidade[a.motivo]-ordemGravidade[b.motivo]);
+  return `
+  ${alerts.length? `<div class="card" style="border-color:${C.danger};margin-bottom:16px"><p style="margin:0 0 8px;font-weight:600;color:${C.danger}">⚠ Contratos que precisam de atenção</p>
+    ${alerts.map(a=>`<div style="border-bottom:1px solid var(--line);padding:8px 0" class="flex between wrap gap8">
+      <div><b>${esc(a.colaborador)}</b> <span class="muted">(${a.tipo==="estagio"?"Estágio":"Aprendiz"}${a.setor?(' · '+esc(a.setor)):''})</span><br><span class="muted" style="font-size:12px">${esc(a.detalhe)}</span></div>
+      <div class="flex gap8">
+        <button data-action="abrir-efetivacao" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}">Abrir efetivação</button>
+        <button data-action="abrir-desligamento-estagio" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}">Abrir desligamento</button>
+      </div>
+    </div>`).join("")}</div>` : `<div class="card" style="margin-bottom:16px"><p class="muted">Nenhum contrato precisando de atenção no momento.</p></div>`}
+  <div class="card" style="margin-bottom:16px"><p style="margin:0 0 10px;font-weight:600">Registrar contrato de prazo determinado</p>
+    <div class="flex wrap gap8">
+      <input id="ctColab" placeholder="Colaborador" style="flex:1;min-width:160px">
+      <select id="ctFilial" onchange="refreshSetorSelect('ctSetor', this.value)">${optsFilial("")}</select>
+      <select id="ctSetor">${optsSetor(null,"")}</select>
+      <select id="ctTipo"><option value="estagio">Estágio</option><option value="aprendiz">Aprendiz</option></select>
+      <input type="date" id="ctInicio" title="Início do contrato">
+      <input type="date" id="ctFim" title="Fim previsto">
+      <input id="ctObs" placeholder="Observação" style="flex:1;min-width:140px">
+      <button class="primary" data-action="add-contrato">Adicionar</button>
+      ${isAdmin? '<button data-action="open-import" data-import="contratos">Importar CSV</button>' : ""}
+    </div>
+  </div>
+  ${ui.showImport==="contratos"? renderImportModal("contratos") : ""}
+  <div class="card" style="padding:0;overflow:auto"><table><thead><tr><th>Colaborador</th><th>Filial</th><th>Setor</th><th>Tipo</th><th>Início</th><th>Fim previsto</th><th>Dias de contrato</th><th></th></tr></thead>
+  <tbody>${contratosPrazo.slice().sort((a,b)=>a.data_fim_prevista.localeCompare(b.data_fim_prevista)).map(c=>{
+    const diasTotais = daysBetween(c.data_inicio, todayISO());
+    return `<tr><td>${esc(c.colaborador)}</td><td>${esc(c.filial||"—")}</td><td>${esc(c.setor||"—")}</td><td>${c.tipo==="estagio"?"Estágio":"Aprendiz"}</td><td>${fmt(c.data_inicio)}</td><td>${fmt(c.data_fim_prevista)}</td>
+    <td style="${diasTotais>=AVISO_DIAS_LIMITE?('color:'+C.danger+';font-weight:600'):''}">${diasTotais}</td>
+    <td><button class="link" data-action="remove-contrato" data-id="${c.id}">excluir</button></td></tr>`;
+  }).join("") || '<tr><td colspan="8" class="muted" style="text-align:center;padding:20px">Nenhum contrato registrado.</td></tr>'}</tbody></table></div>`;
+}
+async function addContrato(){
+  const colaborador=document.getElementById("ctColab").value.trim(), setor=document.getElementById("ctSetor").value, filial=document.getElementById("ctFilial").value, tipo=document.getElementById("ctTipo").value;
+  const data_inicio=document.getElementById("ctInicio").value, data_fim_prevista=document.getElementById("ctFim").value, observacao=document.getElementById("ctObs").value.trim();
+  if(!colaborador||!data_inicio||!data_fim_prevista) return;
+  await sb.from("contratos_prazo").insert({colaborador,setor,filial,tipo,data_inicio,data_fim_prevista,observacao});
+}
+async function removeContrato(id){ await sb.from("contratos_prazo").delete().eq("id",id); }
+async function abrirProcessoSimples(tipoProcesso, colaborador, setor){
+  const etapas={}; (templates[tipoProcesso]?.steps||[]).forEach(s=>etapas[s.id]={done:false,em:null,obs:""});
+  const {data} = await sb.from("processos").insert({tipo:tipoProcesso,colaborador,setor,data_abertura:todayISO(),etapas}).select().single();
+  if(data){ ui.view="processos"; ui.selectedId=data.id; render(); }
+}
+
+/* ---------------- importar CSV ---------------- */
+const IMPORT_SPECS = {
+  atestados: {
+    titulo: "Importar atestados",
+    colunas: ["colaborador","filial","setor","cid","data_inicio","data_fim","observacao"],
+    obrigatorias: ["colaborador","cid","data_inicio","data_fim"],
+    exemplo: ["Maria Silva","Filial SP","Comercial","M54.5","01/03/2026","10/03/2026","Lombalgia"],
+  },
+  contratos: {
+    titulo: "Importar contratos (Estágio/Aprendiz)",
+    colunas: ["colaborador","filial","setor","tipo","data_inicio","data_fim_prevista","observacao"],
+    obrigatorias: ["colaborador","tipo","data_inicio","data_fim_prevista"],
+    exemplo: ["João Souza","Filial RJ","TI","estagio","01/02/2026","01/02/2027",""],
+  },
+};
+function parseDataFlex(v){
+  if(!v) return null;
+  v = String(v).trim();
+  if(/^\d{4}-\d{2}-\d{2}$/.test(v)) return v;
+  const m = v.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if(m) return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;
+  return null;
+}
+function renderImportModal(kind){
+  const spec = IMPORT_SPECS[kind];
+  return `<div class="overlay" data-action="close-import-bg"><div class="modal" style="max-width:480px">
+    <div class="flex between" style="margin-bottom:10px"><h2 style="margin:0;font-size:17px">${spec.titulo}</h2><button class="link" data-action="close-import">✕</button></div>
+    <p class="muted" style="font-size:12px;margin:0 0 8px">O arquivo CSV precisa ter estas colunas na primeira linha (nessa ordem, nomes exatos):</p>
+    <p style="font-size:12px;background:var(--paper);padding:8px;border:1px solid var(--line);word-break:break-all">${spec.colunas.join(", ")}</p>
+    <p class="muted" style="font-size:11px;margin:6px 0 10px">Obrigatórias: ${spec.obrigatorias.join(", ")}. Datas em DD/MM/AAAA ou AAAA-MM-DD. Deixe as outras células vazias se não tiver o dado.</p>
+    <button class="link" style="font-size:12px;padding:0;margin-bottom:10px" data-action="baixar-modelo" data-import="${kind}">⬇ baixar modelo CSV de exemplo</button>
+    <input type="file" id="importFile" accept=".csv" style="width:100%;margin-bottom:10px">
+    <div id="importPreview" class="muted" style="font-size:12px;min-height:16px;margin-bottom:10px"></div>
+    <div class="flex gap8" style="justify-content:flex-end">
+      <button data-action="close-import">Cancelar</button>
+      <button class="primary" data-action="confirmar-import" data-import="${kind}">Importar</button>
+    </div>
+  </div></div>`;
+}
+function baixarModelo(kind){
+  const spec = IMPORT_SPECS[kind];
+  const csv = spec.colunas.join(",")+"\n"+spec.exemplo.join(",");
+  const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "modelo_"+kind+".csv"; a.click();
+}
+function confirmarImport(kind){
+  const fileInput = document.getElementById("importFile");
+  const preview = document.getElementById("importPreview");
+  const spec = IMPORT_SPECS[kind];
+  const file = fileInput.files[0];
+  if(!file){ preview.textContent = "Escolha um arquivo CSV primeiro."; preview.style.color = C.danger; return; }
+  if(/\.xlsx?$/i.test(file.name)){
+    preview.textContent = "Esse arquivo parece ser Excel (.xlsx), não CSV. No Excel/Sheets, use 'Salvar como' > 'CSV (UTF-8)' e importe o arquivo .csv gerado.";
+    preview.style.color = C.danger; return;
+  }
+  preview.textContent = "Lendo arquivo..."; preview.style.color = "";
+  Papa.parse(file, {
+    header: true, skipEmptyLines: true,
+    error: (err)=>{ console.error("Erro no Papa.parse:", err); preview.textContent = "Erro ao ler o CSV: "+err.message; preview.style.color = C.danger; },
+    complete: async (res)=>{
+      try{
+        const rows = res.data;
+        if(!rows.length){ preview.textContent = "O arquivo está vazio ou não tem linhas de dados."; preview.style.color = C.danger; return; }
+        const colunasArquivo = res.meta && res.meta.fields || [];
+        const faltandoColuna = spec.obrigatorias.filter(c=> !colunasArquivo.includes(c));
+        if(faltandoColuna.length){
+          preview.textContent = `O cabeçalho do CSV não tem a(s) coluna(s): ${faltandoColuna.join(", ")}. Colunas encontradas: ${colunasArquivo.join(", ")||"(nenhuma)"}.`;
+          preview.style.color = C.danger; return;
+        }
+        const linhasValidas = []; const erros = [];
+        rows.forEach((r,i)=>{
+          const faltando = spec.obrigatorias.filter(c=> !r[c] || !String(r[c]).trim());
+          if(faltando.length){ erros.push(`Linha ${i+2}: faltando ${faltando.join(", ")}`); return; }
+          const linha = {};
+          spec.colunas.forEach(c=> linha[c] = (r[c]||"").toString().trim() || null);
+          const camposData = kind==="atestados"? ["data_inicio","data_fim"] : ["data_inicio","data_fim_prevista"];
+          let dataOk = true;
+          camposData.forEach(c=>{ if(linha[c]){ const d=parseDataFlex(linha[c]); if(!d){ dataOk=false; erros.push(`Linha ${i+2}: data inválida em "${c}" (${linha[c]})`); } else linha[c]=d; } });
+          if(!dataOk) return;
+          linhasValidas.push(linha);
+        });
+        if(!linhasValidas.length){ preview.textContent = "Nenhuma linha válida encontrada. "+(erros[0]||""); preview.style.color = C.danger; return; }
+        preview.textContent = `Importando ${linhasValidas.length} linha(s)...`; preview.style.color = "";
+        const tabela = kind==="atestados"? "atestados" : "contratos_prazo";
+        const {error} = await sb.from(tabela).insert(linhasValidas);
+        if(error){ console.error("Erro Supabase:", error); preview.textContent = "Erro ao importar: "+error.message; preview.style.color = C.danger; return; }
+        preview.textContent = `${linhasValidas.length} linha(s) importada(s) com sucesso!` + (erros.length? ` (${erros.length} linha(s) ignorada(s) por erro)`:"");
+        preview.style.color = C.ok;
+        setTimeout(()=>{ ui.showImport=null; render(); }, 1400);
+      }catch(e){
+        console.error("Erro inesperado na importação:", e);
+        preview.textContent = "Erro inesperado: "+e.message+" (veja o console pra detalhes)";
+        preview.style.color = C.danger;
+      }
+    }
+  });
+}
+
+/* ---------------- movimentação de colaborador ---------------- */
+const TIPOS_MOV = {promocao:"Promoção", transferencia_setor:"Transferência de setor", transferencia_filial:"Transferência de filial", alteracao_salarial:"Alteração salarial", mudanca_cargo:"Mudança de cargo", outro:"Outro"};
+function fmtMoeda(v){ if(v==null||v==="") return "—"; return "R$ "+Number(v).toLocaleString("pt-BR",{minimumFractionDigits:2}); }
+function renderMovimentacao(){
+  if(!isAdmin) return `<div class="card"><p class="muted">O histórico de movimentação envolve salário, então fica disponível só para quem tem permissão de edição neste artefato.</p></div>`;
+  return `
+  <div class="card" style="margin-bottom:16px">
+    <p style="margin:0 0 10px;font-weight:600">Registrar movimentação</p>
+    <div class="flex wrap gap8" style="margin-bottom:8px">
+      <input id="mvColab" placeholder="Colaborador" style="flex:1;min-width:160px">
+      <select id="mvTipo">${Object.entries(TIPOS_MOV).map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select>
+      <input type="date" id="mvData" value="${todayISO()}" title="Data da movimentação">
+    </div>
+    <div class="flex wrap gap8" style="margin-bottom:8px">
+      <select id="mvFilialAnt" onchange="refreshSetorSelect('mvSetorAnt', this.value)">${optsFilial("")}</select><span class="muted" style="font-size:11px;align-self:center">filial anterior</span>
+      <select id="mvFilialNova" onchange="refreshSetorSelect('mvSetorNovo', this.value)">${optsFilial("")}</select><span class="muted" style="font-size:11px;align-self:center">filial nova</span>
+    </div>
+    <div class="flex wrap gap8" style="margin-bottom:8px">
+      <select id="mvSetorAnt">${optsSetor(null,"")}</select><span class="muted" style="font-size:11px;align-self:center">setor anterior</span>
+      <select id="mvSetorNovo">${optsSetor(null,"")}</select><span class="muted" style="font-size:11px;align-self:center">setor novo</span>
+    </div>
+    <div class="flex wrap gap8" style="margin-bottom:8px">
+      <input id="mvCargoAnt" placeholder="Cargo anterior" style="flex:1;min-width:140px">
+      <input id="mvCargoNovo" placeholder="Cargo novo" style="flex:1;min-width:140px">
+    </div>
+    <div class="flex wrap gap8" style="margin-bottom:8px">
+      <input id="mvSalarioAnt" type="number" step="0.01" placeholder="Salário anterior (R$)" style="width:180px">
+      <input id="mvSalarioNovo" type="number" step="0.01" placeholder="Salário novo (R$)" style="width:180px">
+      <input id="mvMotivo" placeholder="Motivo / observação" style="flex:1;min-width:160px">
+    </div>
+    <button class="primary" data-action="add-movimentacao">Registrar</button>
+  </div>
+  <div class="card" style="padding:0;overflow:auto">
+    <table><thead><tr><th>Data</th><th>Colaborador</th><th>Tipo</th><th>Filial</th><th>Setor</th><th>Cargo</th><th>Salário</th><th>Motivo</th><th></th></tr></thead>
+    <tbody>${movimentacoes.slice().sort((a,b)=>b.data_movimentacao.localeCompare(a.data_movimentacao)).map(m=>`
+      <tr>
+        <td>${fmt(m.data_movimentacao)}</td>
+        <td>${esc(m.colaborador)}</td>
+        <td>${esc(TIPOS_MOV[m.tipo]||m.tipo)}</td>
+        <td>${m.filial_anterior||m.filial_nova? `${esc(m.filial_anterior||"—")} → ${esc(m.filial_nova||"—")}` : "—"}</td>
+        <td>${m.setor_anterior||m.setor_novo? `${esc(m.setor_anterior||"—")} → ${esc(m.setor_novo||"—")}` : "—"}</td>
+        <td>${m.cargo_anterior||m.cargo_novo? `${esc(m.cargo_anterior||"—")} → ${esc(m.cargo_novo||"—")}` : "—"}</td>
+        <td>${m.salario_anterior||m.salario_novo? `${fmtMoeda(m.salario_anterior)} → ${fmtMoeda(m.salario_novo)}` : "—"}</td>
+        <td class="muted" style="font-size:12px">${esc(m.motivo||"")}</td>
+        <td><button class="link" data-action="remove-movimentacao" data-id="${m.id}">excluir</button></td>
+      </tr>`).join("") || '<tr><td colspan="9" class="muted" style="text-align:center;padding:20px">Nenhuma movimentação registrada.</td></tr>'}</tbody></table>
+  </div>`;
+}
+async function addMovimentacao(){
+  const colaborador=document.getElementById("mvColab").value.trim();
+  if(!colaborador) return;
+  const payload = {
+    colaborador,
+    tipo: document.getElementById("mvTipo").value,
+    data_movimentacao: document.getElementById("mvData").value || todayISO(),
+    filial_anterior: document.getElementById("mvFilialAnt").value || null,
+    filial_nova: document.getElementById("mvFilialNova").value || null,
+    setor_anterior: document.getElementById("mvSetorAnt").value || null,
+    setor_novo: document.getElementById("mvSetorNovo").value || null,
+    cargo_anterior: document.getElementById("mvCargoAnt").value.trim() || null,
+    cargo_novo: document.getElementById("mvCargoNovo").value.trim() || null,
+    salario_anterior: document.getElementById("mvSalarioAnt").value || null,
+    salario_novo: document.getElementById("mvSalarioNovo").value || null,
+    motivo: document.getElementById("mvMotivo").value.trim() || null,
+  };
+  const {error} = await sb.from("movimentacoes").insert(payload);
+  if(error) alert("Erro ao registrar movimentação: "+error.message);
+}
+async function removeMovimentacao(id){ await sb.from("movimentacoes").delete().eq("id",id); }
+
+/* ---------------- config ---------------- */
+function renderConfig(){
+  const tipo = ui.configTipo || Object.keys(templates)[0]; const isSetores = tipo==="__setores__"; const isFiliais = tipo==="__filiais__";
+  return `<div style="display:grid;grid-template-columns:220px 1fr;gap:14px">
+    <div class="card" style="padding:0;max-height:70vh;overflow:auto">
+      ${Object.entries(templates).map(([k,v])=>`<button data-action="set-config-tipo" data-tipo="${k}" style="width:100%;text-align:left;padding:10px 12px;border:none;border-bottom:1px solid var(--line);background:${tipo===k?'var(--paper)':'var(--card)'};font-weight:${tipo===k?600:400}">${esc(v.label)} <span class="muted">(${v.steps.length})</span></button>`).join("")}
+      <button data-action="set-config-tipo" data-tipo="__setores__" style="width:100%;text-align:left;padding:10px 12px;border:none;border-bottom:1px solid var(--line);background:${isSetores?'var(--paper)':'var(--card)'};font-weight:${isSetores?600:400}">⚙ Setores</button>
+      <button data-action="set-config-tipo" data-tipo="__filiais__" style="width:100%;text-align:left;padding:10px 12px;border:none;background:${isFiliais?'var(--paper)':'var(--card)'};font-weight:${isFiliais?600:400}">🏢 Filiais</button>
+    </div>
+    <div class="card">${isSetores? renderSetoresConfig() : isFiliais? renderFiliaisConfig() : renderStepsConfig(tipo)}</div>
+  </div>`;
+}
+function renderStepsConfig(tipo){
+  const tpl = templates[tipo];
+  if(!isAdmin) return `<p style="font-weight:600;margin-top:0">${esc(tpl.label)}</p>${tpl.steps.map(s=>`<p style="padding:6px 0;border-bottom:1px solid var(--line)">${esc(s.label)}</p>`).join("")}`;
+  
+  const html = `<div class="flex between" style="margin-bottom:14px">
+    <p style="font-weight:600;margin:0">${esc(tpl.label)} — etapas</p>
+    <span style="font-size:12px;color:var(--muted)">👆 arraste pra reordenar</span>
+  </div>
+  <div class="etapas-container" data-tipo="${tipo}" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-height:50vh;overflow:auto;margin-bottom:12px;background:linear-gradient(to right, rgba(255,80,44,0.02) 0%, rgba(219,168,229,0.02) 100%)">
+  ${tpl.steps.map((s,i)=>`
+    <div class="etapa-drag-item" draggable="true" data-tipo="${tipo}" data-step-id="${s.id}" data-index="${i}" style="padding:10px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;cursor:move;background:var(--card);transition:all 0.15s">
+      <span style="color:var(--steel);font-weight:600;font-size:13px;min-width:24px;text-align:center;display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:rgba(255,80,44,0.1);border-radius:4px">${i+1}</span>
+      <input value="${esc(s.label)}" style="flex:1;border-bottom:1px solid transparent;transition:all 0.15s" onchange="renameStep('${tipo}','${s.id}', this.value)">
+      <button class="link" data-action="remove-step" data-tipo="${tipo}" data-step="${s.id}" style="color:var(--danger)">✕</button>
+    </div>
+  `).join("")}
+  </div>
+  <div class="flex gap8">
+    <input id="novoStepInput" placeholder="+ Nova etapa..." style="flex:1;border-radius:4px">
+    <button class="primary" data-action="add-step">Adicionar</button>
+  </div>`;
+  
+  setTimeout(() => setupDragDrop(tipo), 0);
+  return html;
+}
+function renderFiliaisConfig(){
+  if(!isAdmin) return `<p style="font-weight:600;margin-top:0">Filiais</p>${filiaisList.map(f=>`<p style="padding:6px 0;border-bottom:1px solid var(--line)">${esc(f)}</p>`).join("")}`;
+  return `<p style="font-weight:600;margin-top:0">Filiais</p>
+  <div style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:12px">${filiaisList.map(f=>`<div class="flex between" style="padding:6px 0;border-bottom:1px solid var(--line)"><span>${esc(f)}</span><button class="link" data-action="remove-filial" data-filial="${esc(f)}">excluir</button></div>`).join("") || '<p class="muted" style="padding:6px 0">Nenhuma filial cadastrada ainda.</p>'}</div>
+  <div class="flex gap8"><input id="novoFilialInput" placeholder="Nova filial..." style="flex:1"><button class="primary" data-action="add-filial">Adicionar</button></div>`;
+}
+function renderSetoresConfig(){
+  if(!isAdmin) return `<p style="font-weight:600;margin-top:0">Setores</p>${setoresFull.map(s=>`<p style="padding:6px 0;border-bottom:1px solid var(--line)">${esc(s.nome)} <span class="muted" style="font-size:12px">(${s.filiais&&s.filiais.length?esc(s.filiais.join(", ")):"todas as filiais"})</span></p>`).join("")}`;
+  return `<p style="font-weight:600;margin-top:0">Setores</p>
+  <div style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:12px">
+  ${setoresFull.map(s=>`<div class="flex between" style="padding:6px 0;border-bottom:1px solid var(--line)">
+    <span>${esc(s.nome)} <span class="muted" style="font-size:12px">(${s.filiais&&s.filiais.length?esc(s.filiais.join(", ")):"todas as filiais"})</span></span>
+    <button class="link" data-action="remove-setor" data-setor="${esc(s.nome)}">excluir</button>
+  </div>`).join("") || '<p class="muted" style="padding:6px 0">Nenhum setor cadastrado ainda.</p>'}
+  </div>
+  <p class="muted" style="font-size:12px;margin-bottom:6px">Novo setor — marque as filiais específicas, ou deixe todas desmarcadas para ficar disponível em todas as filiais.</p>
+  <div class="flex wrap gap8" style="margin-bottom:8px">
+  ${filiaisList.map(f=>`<label style="font-size:12px"><input type="checkbox" class="novoSetorFilialChk" value="${esc(f)}"> ${esc(f)}</label>`).join("") || '<span class="muted" style="font-size:12px">Cadastre as filiais primeiro na aba 🏢 Filiais.</span>'}
+  </div>
+  <div class="flex gap8"><input id="novoSetorInput" placeholder="Nome do novo setor..." style="flex:1"><button class="primary" data-action="add-setor">Adicionar</button></div>`;
+}
+
+/* ---------------- ações (Supabase) ---------------- */
+async function toggleStep(procId, stepId){
+  const p = processos.find(x=>x.id===procId); if(!p) return;
+  const tpl = templates[p.tipo];
+  const cur = (p.etapas&&p.etapas[stepId]) || {done:false,em:null,obs:""};
+  const done = !cur.done;
+  const etapas = Object.assign({}, p.etapas, {[stepId]: {done, em: done?todayISO():null, obs:cur.obs||""}});
+  const allDone = tpl.steps.every(s=> etapas[s.id] && etapas[s.id].done);
+  await sb.from("processos").update({etapas, data_conclusao: allDone? (p.data_conclusao||todayISO()) : null}).eq("id", procId);
+}
+window.setObs = async (procId, stepId, val)=>{ const p=processos.find(x=>x.id===procId); const etapas=Object.assign({}, p.etapas, {[stepId]: Object.assign({}, p.etapas[stepId], {obs:val})}); await sb.from("processos").update({etapas}).eq("id",procId); };
+window.setPrazo = async (procId, val)=>{ await sb.from("processos").update({prazo: val||null}).eq("id",procId); };
+window.setSetor = async (procId, val)=>{ await sb.from("processos").update({setor: val||null}).eq("id",procId); };
+window.setFilial = async (procId, val)=>{ await sb.from("processos").update({filial: val||null}).eq("id",procId); };
+window.setAviso = async (procId, campo, val)=>{ await sb.from("processos").update({[campo]: val||null}).eq("id",procId); };
+window.setConf = async (procId, val)=>{ await sb.from("confidencial").upsert({processo_id:procId, texto:val}); };
+window.renameStep = async (tipo, stepId, val)=>{ const steps=templates[tipo].steps.map(s=>s.id===stepId?{id:s.id,label:val}:s); await sb.from("templates").update({steps}).eq("id",tipo); };
+
+async function criarProcesso(){
+  const tipo=document.getElementById("novoTipo").value, colaborador=document.getElementById("novoColab").value.trim();
+  const setor=document.getElementById("novoSetor").value, filial=document.getElementById("novoFilial").value;
+  const data_abertura=document.getElementById("novoAbertura").value||todayISO(), prazo=document.getElementById("novoPrazo").value||null;
+  if(!colaborador) return;
+  const etapas={}; templates[tipo].steps.forEach(s=>etapas[s.id]={done:false,em:null,obs:""});
+  const {error} = await sb.from("processos").insert({tipo,colaborador,setor,filial,data_abertura,prazo,etapas});
+  if(!error){ ui.showNovo=false; render(); }
+}
+async function removerProcesso(id){ await sb.from("processos").delete().eq("id",id); ui.selectedId=null; render(); }
+async function addStep(){ const val=document.getElementById("novoStepInput").value.trim(); if(!val) return; const tipo=ui.configTipo; const steps=templates[tipo].steps.concat([{id:"s"+Math.random().toString(36).slice(2,9), label:val}]); await sb.from("templates").update({steps}).eq("id",tipo); }
+async function removeStep(tipo, stepId){ const steps=templates[tipo].steps.filter(s=>s.id!==stepId); await sb.from("templates").update({steps}).eq("id",tipo); }
+async function moveStep(tipo, index, dir){ const steps=templates[tipo].steps.slice(); const t=index+dir; if(t<0||t>=steps.length) return; [steps[index],steps[t]]=[steps[t],steps[index]]; await sb.from("templates").update({steps}).eq("id",tipo); }
+async function addSetor(){
+  const val=document.getElementById("novoSetorInput").value.trim(); if(!val) return;
+  const filiais = Array.from(document.querySelectorAll(".novoSetorFilialChk:checked")).map(el=>el.value);
+  const {error} = await sb.from("setores").insert({nome:val, filiais});
+  if(error) alert("Erro ao adicionar setor: "+error.message);
+}
+async function removeSetor(nome){ await sb.from("setores").delete().eq("nome",nome); }
+async function addFilial(){
+  const val=document.getElementById("novoFilialInput").value.trim(); if(!val) return;
+  const {error} = await sb.from("filiais").insert({nome:val});
+  if(error) alert("Erro ao adicionar filial: "+error.message);
+}
+async function removeFilial(nome){ await sb.from("filiais").delete().eq("nome",nome); }
+async function addAtestado(){
+  const colaborador=document.getElementById("atColab").value.trim(), setor=document.getElementById("atSetor").value, filial=document.getElementById("atFilial").value, cid=document.getElementById("atCid").value.trim();
+  const data_inicio=document.getElementById("atInicio").value, data_fim=document.getElementById("atFim").value, observacao=document.getElementById("atObs").value.trim();
+  if(!colaborador||!cid||!data_inicio||!data_fim) return;
+  await sb.from("atestados").insert({colaborador,setor,filial,cid,data_inicio,data_fim,observacao});
+}
+async function removeAtestado(id){ await sb.from("atestados").delete().eq("id",id); }
+async function abrirProcessoAfastamento(colaborador, setor, cid, motivo){
+  const etapas={}; templates["afastamento"].steps.forEach(s=>etapas[s.id]={done:false,em:null,obs:""});
+  const {data} = await sb.from("processos").insert({tipo:"afastamento",colaborador,setor,data_abertura:todayISO(),etapas}).select().single();
+  if(data){ await sb.from("confidencial").upsert({processo_id:data.id, texto:`CID: ${cid} — aberto automaticamente (${motivo==="individual"?"atestado > 15 dias":"acúmulo em 60 dias"})`});
+    ui.view="processos"; ui.selectedId=data.id; render(); }
+}
+
+/* ---------------- auth ---------------- */
+async function doLogin(){
+  const email=document.getElementById("authEmail").value.trim(), password=document.getElementById("authPass").value;
+  const {error} = await sb.auth.signInWithPassword({email,password});
+  if(error) document.getElementById("authError").textContent = error.message;
+}
+async function doSignup(){
+  const email=document.getElementById("authEmail").value.trim(), password=document.getElementById("authPass").value;
+  const {error} = await sb.auth.signUp({email,password});
+  if(error) document.getElementById("authError").textContent = error.message;
+  else document.getElementById("authError").textContent = "Conta criada! Já pode entrar.";
+}
+
+/* ---------------- drag and drop para etapas ---------------- */
+let draggedItem = null;
+function setupDragDrop(tipo){
+  const container = document.querySelector(`.etapas-container[data-tipo="${tipo}"]`);
+  if(!container) return;
+  const items = container.querySelectorAll(".etapa-drag-item");
+  items.forEach(item => {
+    item.addEventListener("dragstart", (e) => {
+      draggedItem = item;
+      item.style.opacity = "0.5";
+      e.dataTransfer.effectAllowed = "move";
+    });
+    item.addEventListener("dragend", (e) => {
+      item.style.opacity = "1";
+      items.forEach(el => el.style.borderTop = "");
+    });
+    item.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      if (draggedItem && draggedItem !== item) {
+        item.style.borderTop = "2px solid var(--steel)";
+      }
+    });
+    item.addEventListener("dragleave", (e) => {
+      item.style.borderTop = "";
+    });
+    item.addEventListener("drop", async (e) => {
+      e.preventDefault();
+      item.style.borderTop = "";
+      if (draggedItem && draggedItem !== item) {
+        const dragIndex = parseInt(draggedItem.dataset.index);
+        const dropIndex = parseInt(item.dataset.index);
+        const tipoDrag = draggedItem.dataset.tipo;
+        const tpl = templates[tipoDrag];
+        const steps = tpl.steps.slice();
+        const [moved] = steps.splice(dragIndex, 1);
+        steps.splice(dropIndex, 0, moved);
+        await sb.from("templates").update({steps}).eq("id", tipoDrag);
+      }
+    });
+  });
+}
+
+/* ---------------- eventos ---------------- */
+document.addEventListener("click", (e)=>{
+  const bg=e.target.dataset.action==='close-detail-bg'?e.target:null; if(bg){ ui.selectedId=null; render(); return; }
+  const bg2=e.target.dataset.action==='close-novo-bg'?e.target:null; if(bg2){ ui.showNovo=false; render(); return; }
+  const bg3=e.target.dataset.action==='close-import-bg'?e.target:null; if(bg3){ ui.showImport=null; render(); return; }
+  const el=e.target.closest("[data-action]"); if(!el) return;
+  const a=el.dataset.action;
+  if(a==="set-view"){ ui.view=el.dataset.view; ui.selectedId=null; render(); }
+  else if(a==="open-novo"){ ui.showNovo=true; render(); }
+  else if(a==="close-novo"){ ui.showNovo=false; render(); }
+  else if(a==="criar-processo"){ criarProcesso(); }
+  else if(a==="open-detail"){ ui.selectedId=el.dataset.id; render(); }
+  else if(a==="close-detail"){ ui.selectedId=null; render(); }
+  else if(a==="toggle-step"){ toggleStep(el.dataset.id, el.dataset.step); }
+  else if(a==="remove-processo"){ removerProcesso(el.dataset.id); }
+  else if(a==="add-step"){ addStep(); }
+  else if(a==="remove-step"){ removeStep(el.dataset.tipo, el.dataset.step); }
+  else if(a==="move-step"){ moveStep(el.dataset.tipo, parseInt(el.dataset.index), parseInt(el.dataset.dir)); }
+  else if(a==="set-config-tipo"){ ui.configTipo=el.dataset.tipo; render(); }
+  else if(a==="add-setor"){ addSetor(); }
+  else if(a==="remove-setor"){ removeSetor(el.dataset.setor); }
+  else if(a==="add-filial"){ addFilial(); }
+  else if(a==="remove-filial"){ removeFilial(el.dataset.filial); }
+  else if(a==="open-import"){ ui.showImport=el.dataset.import; render(); }
+  else if(a==="close-import"){ ui.showImport=null; render(); }
+  else if(a==="baixar-modelo"){ baixarModelo(el.dataset.import); }
+  else if(a==="confirmar-import"){ confirmarImport(el.dataset.import); }
+  else if(a==="add-movimentacao"){ addMovimentacao(); }
+  else if(a==="remove-movimentacao"){ removeMovimentacao(el.dataset.id); }
+  else if(a==="add-atestado"){ addAtestado(); }
+  else if(a==="remove-atestado"){ removeAtestado(el.dataset.id); }
+  else if(a==="abrir-afastamento"){ abrirProcessoAfastamento(el.dataset.colaborador, el.dataset.setor, el.dataset.cid, el.dataset.motivo); }
+  else if(a==="add-contrato"){ addContrato(); }
+  else if(a==="remove-contrato"){ removeContrato(el.dataset.id); }
+  else if(a==="abrir-efetivacao"){ abrirProcessoSimples("admissao_clt", el.dataset.colaborador, el.dataset.setor); }
+  else if(a==="abrir-desligamento-estagio"){ abrirProcessoSimples("rescisao_estagio", el.dataset.colaborador, el.dataset.setor); }
+  else if(a==="logout"){ sb.auth.signOut(); }
+  else if(a==="do-login"){ doLogin(); }
+  else if(a==="do-signup"){ doSignup(); }
+  else if(a==="toggle-auth"){ authMode = authMode==="login"?"signup":"login"; render(); }
+});
+document.addEventListener("change",(e)=>{ const el=e.target.closest("[data-action-change]"); if(!el) return; ui[el.dataset.actionChange]=el.value; render(); });
+
+/* ---------------- carregar dados + realtime ---------------- */
+async function loadAll(){
+  const {data:tRows} = await sb.from("templates").select("*");
+  templates = {}; (tRows||[]).forEach(r=> templates[r.id] = {label:r.label, steps:r.steps});
+  const {data:sRows} = await sb.from("setores").select("*").order("nome");
+  setoresFull = (sRows||[]).map(r=>({nome:r.nome, filiais:r.filiais||[]}));
+  const {data:fRows} = await sb.from("filiais").select("*").order("nome");
+  filiaisList = (fRows||[]).map(r=>r.nome);
+  const {data:pRows} = await sb.from("processos").select("*").order("criado_em",{ascending:false});
+  processos = pRows||[];
+  const {data:ctRows} = await sb.from("contratos_prazo").select("*");
+  contratosPrazo = ctRows||[];
+  const {data:adminCheck} = await sb.from("admins").select("email").eq("email", session.user.email).maybeSingle();
+  isAdmin = !!adminCheck;
+  if(isAdmin){
+    const {data:cRows} = await sb.from("confidencial").select("*");
+    confMap = {}; (cRows||[]).forEach(r=> confMap[r.processo_id]=r.texto);
+    const {data:aRows} = await sb.from("atestados").select("*");
+    atestados = aRows||[];
+    const {data:mRows} = await sb.from("movimentacoes").select("*");
+    movimentacoes = mRows||[];
+  }
+  render();
+  subscribeRealtime();
+}
+let channelsWired=false;
+function subscribeRealtime(){
+  if(channelsWired) return; channelsWired=true;
+  sb.channel("db-changes")
+    .on("postgres_changes",{event:"*",schema:"public",table:"processos"}, async ()=>{ const {data}=await sb.from("processos").select("*").order("criado_em",{ascending:false}); processos=data||[]; render(); })
+    .on("postgres_changes",{event:"*",schema:"public",table:"templates"}, async ()=>{ const {data}=await sb.from("templates").select("*"); templates={}; (data||[]).forEach(r=>templates[r.id]={label:r.label,steps:r.steps}); render(); })
+    .on("postgres_changes",{event:"*",schema:"public",table:"setores"}, async ()=>{ const {data}=await sb.from("setores").select("*").order("nome"); setoresFull=(data||[]).map(r=>({nome:r.nome, filiais:r.filiais||[]})); render(); })
+    .on("postgres_changes",{event:"*",schema:"public",table:"filiais"}, async ()=>{ const {data}=await sb.from("filiais").select("*").order("nome"); filiaisList=(data||[]).map(r=>r.nome); render(); })
+    .on("postgres_changes",{event:"*",schema:"public",table:"confidencial"}, async ()=>{ if(!isAdmin) return; const {data}=await sb.from("confidencial").select("*"); confMap={}; (data||[]).forEach(r=>confMap[r.processo_id]=r.texto); render(); })
+    .on("postgres_changes",{event:"*",schema:"public",table:"atestados"}, async ()=>{ if(!isAdmin) return; const {data}=await sb.from("atestados").select("*"); atestados=data||[]; render(); })
+    .on("postgres_changes",{event:"*",schema:"public",table:"movimentacoes"}, async ()=>{ if(!isAdmin) return; const {data}=await sb.from("movimentacoes").select("*"); movimentacoes=data||[]; render(); })
+    .on("postgres_changes",{event:"*",schema:"public",table:"contratos_prazo"}, async ()=>{ const {data}=await sb.from("contratos_prazo").select("*"); contratosPrazo=data||[]; render(); })
+    .subscribe();
+}
+
+(async function init(){
+  const {data:{session:s}} = await sb.auth.getSession();
+  session = s; render();
+  if(session) loadAll();
+  sb.auth.onAuthStateChange((event, s2)=>{
+    session = s2;
+    if(event==="SIGNED_IN"){ loadAll(); }
+    else render();
+  });
+})();
+</script>
+</body>
+</html>
