@@ -310,90 +310,70 @@ function renderBarList(rows, corBarra, sufixo){
 function renderAfastamentos(){
   if(!isAdmin) return `<div class="card"><p class="muted">O controle de afastamentos envolve CID (dado de saúde) — disponível só para gestores. Peça pro seu gestor te adicionar na tabela "admins" no Supabase se precisar de acesso.</p></div>`;
   
-  // Calcular filtros de período
+  // Calcular todos os anos disponíveis
   const anosAtestados = Array.from(new Set(atestados.map(a=>a.data_inicio.slice(0,4)))).sort().reverse();
-  const mesAtualStr = todayISO().slice(0,7);
-  const anoFiltro = ui.filtroAnoAfastamento || mesAtualStr.slice(0,4);
-  const mesFiltro = ui.filtroMesAfastamento || mesAtualStr.slice(5,7);
-  const mesAnoSelecionado = `${anoFiltro}-${mesFiltro}`;
+  const mesesArray = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  const mesesNomes = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
   
-  // Filtrar atestados pelo período
-  const atestadosFiltrados = atestados.filter(a=> a.data_inicio.slice(0,7) <= mesAnoSelecionado && a.data_fim.slice(0,7) >= mesAnoSelecionado);
+  const anoFiltro = ui.filtroAnoAfastamento || '';
+  const mesFiltro = ui.filtroMesAfastamento || '';
+  
+  // Filtrar atestados
+  let atestadosFiltrados = atestados;
+  if(anoFiltro) atestadosFiltrados = atestadosFiltrados.filter(a => a.data_inicio.slice(0,4) === anoFiltro);
+  if(mesFiltro) atestadosFiltrados = atestadosFiltrados.filter(a => a.data_inicio.slice(5,7) === mesFiltro);
   
   const alerts = computeAlertas(atestadosFiltrados);
   const proximos = atestadosFiltrados.filter(a=>a.dias>=10 && a.dias<=15);
   const acima = atestadosFiltrados.filter(a=>a.dias>15);
   const porCid = contagemPor(atestadosFiltrados, "cid");
-  const porSetor = contagemPor(atestadosFiltrados, "setor");
-  const porFilial = contagemPor(atestadosFiltrados, "filial");
   
-  // Calcular evolução mensal
-  const evolucao = calcularEvolucaoMensal(atestados);
-  const topColaboradores = calcularTopColaboradores(atestados, 10);
+  // Agrupar por colaborador
+  const porColab = {};
+  atestadosFiltrados.forEach(a => {
+    if(!porColab[a.colaborador]) porColab[a.colaborador] = {total: 0, dias: 0, atestados: []};
+    porColab[a.colaborador].total++;
+    porColab[a.colaborador].dias += a.dias;
+    porColab[a.colaborador].atestados.push(a);
+  });
+  
+  const colaboradoresOrdenados = Object.entries(porColab)
+    .map(([colaborador, data]) => ({colaborador, ...data}))
+    .sort((a,b) => b.dias - a.dias);
   
   return `
   <!-- Filtro de Período -->
-  <div class="card" style="margin-bottom:16px;background:linear-gradient(135deg, rgba(255,80,44,0.05), rgba(219,168,229,0.05))">
+  <div class="card" style="margin-bottom:16px">
     <p style="margin:0 0 10px;font-weight:600">📅 Filtrar por período</p>
     <div class="flex wrap gap8" style="align-items:center">
-      <select data-action-change="filtroAnoAfastamento" style="min-width:120px">
+      <select data-action-change="filtroAnoAfastamento" style="flex:1;min-width:140px">
         <option value="">— Todos os anos —</option>
         ${anosAtestados.map(a=>`<option ${a===anoFiltro?'selected':''}>${a}</option>`).join("")}
       </select>
-      <select data-action-change="filtroMesAfastamento" style="min-width:140px">
+      <select data-action-change="filtroMesAfastamento" style="flex:1;min-width:140px">
         <option value="">— Todos os meses —</option>
-        <option ${mesFiltro==='01'?'selected':''} value="01">Janeiro</option>
-        <option ${mesFiltro==='02'?'selected':''} value="02">Fevereiro</option>
-        <option ${mesFiltro==='03'?'selected':''} value="03">Março</option>
-        <option ${mesFiltro==='04'?'selected':''} value="04">Abril</option>
-        <option ${mesFiltro==='05'?'selected':''} value="05">Maio</option>
-        <option ${mesFiltro==='06'?'selected':''} value="06">Junho</option>
-        <option ${mesFiltro==='07'?'selected':''} value="07">Julho</option>
-        <option ${mesFiltro==='08'?'selected':''} value="08">Agosto</option>
-        <option ${mesFiltro==='09'?'selected':''} value="09">Setembro</option>
-        <option ${mesFiltro==='10'?'selected':''} value="10">Outubro</option>
-        <option ${mesFiltro==='11'?'selected':''} value="11">Novembro</option>
-        <option ${mesFiltro==='12'?'selected':''} value="12">Dezembro</option>
+        ${mesesArray.map((m, i) => `<option ${m===mesFiltro?'selected':''}>${m === mesFiltro ? '✓' : ''} ${mesesNomes[i]}</option>`).join("")}
       </select>
-      <span class="muted" style="flex:1;text-align:right;font-size:12px">${atestadosFiltrados.length} atestados no período</span>
+      <span class="muted" style="font-size:12px">📊 ${atestadosFiltrados.length} atestado(s)</span>
     </div>
   </div>
   
+  <!-- Cards de Resumo -->
   <div class="grid4" style="margin-bottom:16px">
     <div class="card"><p class="muted">Total no período</p><p style="font-size:24px;font-weight:600;margin:4px 0 0">${atestadosFiltrados.length}</p></div>
-    <div class="card"><p class="muted">Próximos de 15 dias (10–15)</p><p style="font-size:24px;font-weight:600;margin:4px 0 0;color:${proximos.length?C.warn:'inherit'}">${proximos.length}</p></div>
+    <div class="card"><p class="muted">Próximos 15 dias (10–15)</p><p style="font-size:24px;font-weight:600;margin:4px 0 0;color:${proximos.length?C.warn:'inherit'}">${proximos.length}</p></div>
     <div class="card"><p class="muted">Acima de 15 dias</p><p style="font-size:24px;font-weight:600;margin:4px 0 0;color:${acima.length?C.danger:'inherit'}">${acima.length}</p></div>
     <div class="card"><p class="muted">CIDs distintos</p><p style="font-size:24px;font-weight:600;margin:4px 0 0">${porCid.length}</p></div>
   </div>
   
-  <div class="flex wrap gap8" style="margin-bottom:16px">
-    <div class="card" style="flex:1;min-width:240px"><p class="muted" style="margin:0 0 10px">Atestados por CID</p>${renderBarList(porCid.slice(0,8), C.steel, true)}</div>
-    <div class="card" style="flex:1;min-width:240px"><p class="muted" style="margin:0 0 10px">Atestados por setor</p>${renderBarList(porSetor.slice(0,8), C.accent, false)}</div>
-    <div class="card" style="flex:1;min-width:240px"><p class="muted" style="margin:0 0 10px">Atestados por filial</p>${renderBarList(porFilial.slice(0,8), C.ok, false)}</div>
-  </div>
-  
-  <!-- Evolução Mensal -->
+  <!-- Atestados por CID (simples) -->
   <div class="card" style="margin-bottom:16px">
-    <p style="margin:0 0 10px;font-weight:600">📈 Evolução mensal de atestados</p>
-    <div style="display:flex;align-items:flex-end;gap:4px;height:180px;padding:10px 0;border-bottom:2px solid var(--line)">
-      ${evolucao.map((m,i)=>`
-        <button onclick="console.log('${m.mes}: ${m.total} atestados')" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-height:100px;border:none;background:none;cursor:pointer;padding:0">
-          <div style="width:100%;background:linear-gradient(to top, ${C.steel}, ${C.accent});height:${Math.max(m.total*15,10)}px;border-radius:3px 3px 0 0;opacity:0.8;transition:opacity 0.2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8" title="${m.mes}: ${m.total} atestados"></div>
-          <span style="font-size:10px;margin-top:6px;color:var(--muted)">${m.mes.slice(5)}</span>
-        </button>
-      `).join("")}
-    </div>
-  </div>
-  
-  <!-- Top 10 Colaboradores -->
-  <div class="card" style="margin-bottom:16px">
-    <p style="margin:0 0 10px;font-weight:600">🏆 Top 10 colaboradores com mais atestados</p>
-    <div style="display:grid;gap:8px">
-      ${topColaboradores.map((c,i)=>`
-        <div style="display:flex;align-items:center;gap:10px;padding:8px;background:rgba(255,80,44,0.03);border-radius:4px">
-          <span style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:${C.steel};color:#fff;font-weight:600;border-radius:50%;font-size:12px">${i+1}</span>
-          <span style="flex:1"><b>${esc(c.colaborador)}</b><br><span class="muted" style="font-size:12px">${c.total} atestados (${c.dias} dias)</span></span>
-          <span style="font-weight:600;color:${c.dias>30?C.danger:C.warn}">${c.dias} dias</span>
+    <p style="margin:0 0 10px;font-weight:600">🏥 Atestados por CID</p>
+    <div style="display:grid;gap:6px;max-height:300px;overflow-y:auto">
+      ${porCid.length === 0 ? '<p class="muted" style="font-size:12px">Sem dados</p>' : porCid.slice(0, 15).map(c => `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:rgba(255,80,44,0.03);border-radius:4px;border-left:3px solid ${C.steel}">
+          <span style="font-weight:600;font-size:13px">${esc(c.label)}</span>
+          <span style="background:${C.steel};color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600">${c.count}</span>
         </div>
       `).join("")}
     </div>
@@ -402,10 +382,37 @@ function renderAfastamentos(){
   ${alerts.length? `<div class="card" style="border-color:${C.danger};margin-bottom:16px"><p style="margin:0 0 8px;font-weight:600;color:${C.danger}">⚠ Alertas de afastamento por INSS</p>
     ${alerts.map(a=>`<div style="border-bottom:1px solid var(--line);padding:8px 0" class="flex between wrap gap8">
       <div><b>${esc(a.colaborador)}</b> <span class="muted">(CID ${esc(a.cid)}${a.setor?(' · '+esc(a.setor)):''})</span><br><span class="muted" style="font-size:12px">${esc(a.detalhe)}</span></div>
-      <button data-action="abrir-afastamento" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}" data-cid="${esc(a.cid)}" data-motivo="${a.motivo}">Abrir processo de afastamento</button>
-    </div>`).join("")}</div>` : `<div class="card" style="margin-bottom:16px"><p class="muted">Nenhum alerta no momento.</p></div>`}
+      <button data-action="abrir-afastamento" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}" data-cid="${esc(a.cid)}" data-motivo="${a.motivo}">Abrir processo</button>
+    </div>`).join("")}</div>` : ''}
   
-  <div class="card" style="margin-bottom:16px"><p style="margin:0 0 10px;font-weight:600">Registrar atestado</p>
+  <!-- Lista de Colaboradores com Atestados -->
+  <div class="card" style="margin-bottom:16px">
+    <p style="margin:0 0 10px;font-weight:600">👥 Colaboradores com atestados</p>
+    <div style="display:grid;gap:10px">
+      ${colaboradoresOrdenados.length === 0 ? '<p class="muted">Sem atestados no período</p>' : colaboradoresOrdenados.map(c => `
+        <div style="padding:12px;background:rgba(219,168,229,0.05);border-radius:6px;border-left:4px solid ${C.accent}">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+            <div>
+              <p style="margin:0;font-weight:600;color:var(--ink)">${esc(c.colaborador)}</p>
+              <p style="margin:2px 0 0;font-size:12px;color:var(--muted)">${c.atestados[0].filial || '—'} · ${c.atestados[0].setor || '—'}</p>
+            </div>
+            <div style="text-align:right">
+              <p style="margin:0;font-weight:600;font-size:14px;color:${c.dias>30?C.danger:C.warn}">${c.dias} dias</p>
+              <p style="margin:2px 0 0;font-size:11px;color:var(--muted)">${c.total} atestado(s)</p>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid rgba(219,168,229,0.2);padding-top:8px">
+            ${c.atestados.map(a => `
+              <span style="font-size:11px;padding:3px 8px;background:var(--card);border-radius:3px;border:1px solid var(--line)">${esc(a.cid)} — ${a.dias}d</span>
+            `).join("")}
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  </div>
+  
+  <!-- Registrar novo atestado -->
+  <div class="card" style="margin-bottom:16px"><p style="margin:0 0 10px;font-weight:600">➕ Registrar atestado</p>
     <div class="flex wrap gap8">
       <input id="atColab" placeholder="Colaborador" style="flex:1;min-width:160px">
       <select id="atFilial" onchange="refreshSetorSelect('atSetor', this.value)">${optsFilial("")}</select>
@@ -418,6 +425,8 @@ function renderAfastamentos(){
     </div>
   </div>
   ${ui.showImport==="atestados"? renderImportModal("atestados") : ""}
+  
+  <!-- Tabela de Atestados -->
   <div class="card" style="padding:0;overflow:auto"><table><thead><tr><th>Colaborador</th><th>Filial</th><th>Setor</th><th>CID</th><th>Início</th><th>Fim</th><th>Dias</th><th>Processo</th><th></th></tr></thead>
   <tbody>${atestadosFiltrados.slice().sort((a,b)=>b.data_inicio.localeCompare(a.data_inicio)).map(a=>{
     const proc = processoAfastamentoDe(a.colaborador);
@@ -425,33 +434,6 @@ function renderAfastamentos(){
     <td>${proc? `<button class="link" data-action="open-detail" data-id="${proc.id}">ver processo</button>` : `<button class="link" data-action="abrir-afastamento" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}" data-cid="${esc(a.cid)}" data-motivo="manual">abrir processo</button>`}</td>
     <td><button class="link" data-action="remove-atestado" data-id="${a.id}">excluir</button></td></tr>`;
   }).join("") || '<tr><td colspan="9" class="muted" style="text-align:center;padding:20px">Nenhum atestado registrado.</td></tr>'}</tbody></table></div>`;
-}
-function calcularEvolucaoMensal(list){
-  const meses = {};
-  const agora = new Date();
-  for(let i=11; i>=0; i--){
-    const d = new Date(agora);
-    d.setMonth(d.getMonth()-i);
-    const mes = d.toISOString().slice(0,7);
-    meses[mes] = 0;
-  }
-  list.forEach(a=>{
-    const mes = a.data_inicio.slice(0,7);
-    if(mes in meses) meses[mes]++;
-  });
-  return Object.entries(meses).map(([mes, total])=>({mes, total}));
-}
-function calcularTopColaboradores(list, limite){
-  const byColab = {};
-  list.forEach(a=>{
-    if(!byColab[a.colaborador]) byColab[a.colaborador] = {total:0, dias:0};
-    byColab[a.colaborador].total++;
-    byColab[a.colaborador].dias += a.dias;
-  });
-  return Object.entries(byColab)
-    .map(([colaborador, data])=>({colaborador, ...data}))
-    .sort((a,b)=>b.dias-a.dias)
-    .slice(0, limite);
 }
 function computeAlertas(list){
   const alerts=[]; const byKey={};
@@ -973,6 +955,14 @@ function subscribeRealtime(){
   session = s; render();
   if(session) loadAll();
   sb.auth.onAuthStateChange((event, s2)=>{
+    session = s2;
+    if(event==="SIGNED_IN"){ loadAll(); }
+    else render();
+  });
+})();
+</script>
+</body>
+</html>
     session = s2;
     if(event==="SIGNED_IN"){ loadAll(); }
     else render();
