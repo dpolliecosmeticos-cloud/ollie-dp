@@ -410,10 +410,10 @@ function renderGraficoTendencia(atestados) {
       <p style="margin:0 0 10px;font-weight:600">🏥 CIDs com mais atestados</p>
       <div style="display:grid;gap:6px;max-height:300px;overflow-y:auto">
         ${porCid.length === 0 ? '<p class="muted">Sem dados</p>' : porCid.slice(0,10).map(c => `
-          <button onclick="ui.selectedCid='${esc(c.label)}'; render()" style="padding:10px;border:1px solid var(--line);background:var(--card);border-radius:4px;text-align:left;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(255,80,44,0.05)'" onmouseout="this.style.background='var(--card)'">
+          <button onclick="ui.selectedCid='${esc(c.chave)}'; render()" style="padding:10px;border:1px solid var(--line);background:var(--card);border-radius:4px;text-align:left;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(255,80,44,0.05)'" onmouseout="this.style.background='var(--card)'">
             <div style="display:flex;justify-content:space-between;align-items:center">
-              <span style="font-weight:600;font-size:13px">${esc(c.label)}</span>
-              <span style="background:${C.steel};color:#fff;padding:2px 8px;border-radius:3px;font-size:11px">${c.count}</span>
+              <span style="font-weight:600;font-size:13px">${esc(c.chave)}</span>
+              <span style="background:${C.steel};color:#fff;padding:2px 8px;border-radius:3px;font-size:11px">${c.qtd}</span>
             </div>
           </button>
         `).join("")}
