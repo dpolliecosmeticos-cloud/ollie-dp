@@ -72,7 +72,7 @@ function calcProc(proc, templates){
 /* ---------------- estado ---------------- */
 let session=null, isAdmin=false;
 let templates={}, setoresFull=[], filiaisList=[], processos=[], atestados=[], confMap={}, contratosPrazo=[], movimentacoes=[];
-let ui = {view:"dashboard", filtroTipo:"todos", filtroStatus:"todos", filtroSetor:"todos", filtroFilial:"todos", filtroMes:"todos", filtroAno:"todos", busca:"", selectedId:null, showNovo:false, configTipo:null, showImport:null};
+let ui = {view:"dashboard", filtroTipo:"todos", filtroStatus:"todos", filtroSetor:"todos", filtroFilial:"todos", filtroMes:"todos", filtroAno:"todos", busca:"", selectedId:null, showNovo:false, configTipo:null, showImport:null, filtroAnoAfastamento:"", filtroMesAfastamento:"", selectedCid:null, selectedColab:null};
 let authMode = "login";
 function setorNomes(){ return setoresFull.map(s=>s.nome); }
 function setoresParaFilial(filial){
@@ -290,66 +290,226 @@ function renderBarList(rows, corBarra, sufixo){
       <div class="stackbar"><div style="width:${(r.qtd/max*100)}%;background:${corBarra}"></div></div>
     </div>`).join("");
 }
-function renderAfastamentos(){
-  if(!isAdmin) return `<div class="card"><p class="muted">O controle de afastamentos envolve CID (dado de saúde) — disponível só para gestores. Peça pro seu gestor te adicionar na tabela "admins" no Supabase se precisar de acesso.</p></div>`;
-  const alerts = computeAlertas(atestados);
-  const proximos = atestados.filter(a=>a.dias>=10 && a.dias<=15);
-  const acima = atestados.filter(a=>a.dias>15);
-  const porCid = contagemPor(atestados, "cid");
-  const porSetor = contagemPor(atestados, "setor");
-  const porFilial = contagemPor(atestados, "filial");
+function renderGraficoTendencia(atestados) {
+  const porMes = {};
+  atestados.forEach(a => {
+    const mes = a.data_inicio.slice(0,7);
+    porMes[mes] = (porMes[mes] || 0) + 1;
+  });
+  const meses = Object.keys(porMes).sort();
+  if(meses.length === 0) return `<p class="muted" style="text-align:center;padding:40px">Sem dados para gráfico</p>`;
+  
+  const maxVal = Math.max(...Object.values(porMes), 1);
+  const width = 90 / meses.length;
+  let pathD = '';
+  meses.forEach((mes, i) => {
+    const val = porMes[mes];
+    const x = 5 + (i + 0.5) * width;
+    const y = 45 - (val / maxVal) * 40;
+    pathD += (i === 0 ? 'M' : 'L') + x + ',' + y;
+  });
+  
+  const pontos = meses.map((mes, i) => {
+    const val = porMes[mes];
+    const x = 5 + (i + 0.5) * width;
+    const y = 45 - (val / maxVal) * 40;
+    const mesLabel = mes.slice(5);
+    return `
+      <rect x="${x-width/3}" y="${y}" width="${width*2/3}" height="${45-y}" fill="${C.steel}" opacity="0.3"/>
+      <circle cx="${x}" cy="${y}" r="0.8" fill="${C.steel}"/>
+      <text x="${x}" y="48" text-anchor="middle" font-size="1.8" fill="var(--muted)">${mesLabel}</text>
+      <text x="${x}" y="${y-1.5}" text-anchor="middle" font-size="1.5" fill="${C.steel}" font-weight="600">${val}</text>
+    `;
+  }).join("");
+  
   return `
+    <svg viewBox="0 0 100 50" style="width:100%;height:220px;border:1px solid var(--line);border-radius:4px;background:var(--paper)" preserveAspectRatio="xMidYMid meet">
+      <line x1="5" y1="45" x2="95" y2="45" stroke="var(--line)" stroke-width="0.2"/>
+      <line x1="5" y1="5" x2="5" y2="45" stroke="var(--line)" stroke-width="0.2"/>
+      <path d="${pathD}" fill="none" stroke="${C.steel}" stroke-width="0.5"/>
+      ${pontos}
+    </svg>
+  `;
+}
+
+  if(!isAdmin) return `<div class="card"><p class="muted">O controle de afastamentos envolve CID (dado de saúde) — disponível só para gestores. Peça pro seu gestor te adicionar na tabela "admins" no Supabase se precisar de acesso.</p></div>`;
+  
+  // Filtro
+  const anosDisponiveis = Array.from(new Set(atestados.map(a=>a.data_inicio.slice(0,4)))).sort().reverse();
+  const anoFiltro = ui.filtroAnoAfastamento || '';
+  const mesFiltro = ui.filtroMesAfastamento || '';
+  
+  let atestadosFiltrados = atestados;
+  if(anoFiltro) atestadosFiltrados = atestadosFiltrados.filter(a => a.data_inicio.slice(0,4) === anoFiltro);
+  if(mesFiltro) atestadosFiltrados = atestadosFiltrados.filter(a => a.data_inicio.slice(5,7) === mesFiltro);
+  
+  const alerts = computeAlertas(atestadosFiltrados);
+  const proximos = atestadosFiltrados.filter(a=>a.dias>=10 && a.dias<=15);
+  const acima = atestadosFiltrados.filter(a=>a.dias>15);
+  const porCid = contagemPor(atestadosFiltrados, "cid");
+  const porSetor = contagemPor(atestadosFiltrados, "setor");
+  const porFilial = contagemPor(atestadosFiltrados, "filial");
+  
+  // Colaboradores
+  const porColab = {};
+  atestadosFiltrados.forEach(a => {
+    if(!porColab[a.colaborador]) porColab[a.colaborador] = {total: 0, dias: 0, atestados: []};
+    porColab[a.colaborador].total++;
+    porColab[a.colaborador].dias += a.dias;
+    porColab[a.colaborador].atestados.push(a);
+  });
+  
+  const colaboradoresOrdenados = Object.entries(porColab)
+    .map(([colab, data]) => ({colaborador: colab, ...data}))
+    .sort((a,b) => b.dias - a.dias);
+  
+  return `
+  <!-- Filtro -->
+  <div class="card" style="margin-bottom:16px">
+    <p style="margin:0 0 10px;font-weight:600">📅 Filtrar por período</p>
+    <div class="flex wrap gap8">
+      <select data-action-change="filtroAnoAfastamento">
+        <option value="">— Todos os anos —</option>
+        ${anosDisponiveis.map(a=>`<option ${a===anoFiltro?'selected':''}>${a}</option>`).join("")}
+      </select>
+      <select data-action-change="filtroMesAfastamento">
+        <option value="">— Todos os meses —</option>
+        <option ${mesFiltro==='01'?'selected':''} value="01">Janeiro</option>
+        <option ${mesFiltro==='02'?'selected':''} value="02">Fevereiro</option>
+        <option ${mesFiltro==='03'?'selected':''} value="03">Março</option>
+        <option ${mesFiltro==='04'?'selected':''} value="04">Abril</option>
+        <option ${mesFiltro==='05'?'selected':''} value="05">Maio</option>
+        <option ${mesFiltro==='06'?'selected':''} value="06">Junho</option>
+        <option ${mesFiltro==='07'?'selected':''} value="07">Julho</option>
+        <option ${mesFiltro==='08'?'selected':''} value="08">Agosto</option>
+        <option ${mesFiltro==='09'?'selected':''} value="09">Setembro</option>
+        <option ${mesFiltro==='10'?'selected':''} value="10">Outubro</option>
+        <option ${mesFiltro==='11'?'selected':''} value="11">Novembro</option>
+        <option ${mesFiltro==='12'?'selected':''} value="12">Dezembro</option>
+      </select>
+      <span class="muted" style="font-size:12px">📊 ${atestadosFiltrados.length} atestado(s)</span>
+    </div>
+  </div>
+  
   <div class="grid4" style="margin-bottom:16px">
-    <div class="card"><p class="muted">Total de atestados</p><p style="font-size:24px;font-weight:600;margin:4px 0 0">${atestados.length}</p></div>
-    <div class="card"><p class="muted">Próximos de 15 dias (10–15)</p><p style="font-size:24px;font-weight:600;margin:4px 0 0;color:${proximos.length?C.warn:'inherit'}">${proximos.length}</p></div>
+    <div class="card"><p class="muted">Total no período</p><p style="font-size:24px;font-weight:600;margin:4px 0 0">${atestadosFiltrados.length}</p></div>
+    <div class="card"><p class="muted">Próximos 15 dias (10–15)</p><p style="font-size:24px;font-weight:600;margin:4px 0 0;color:${proximos.length?C.warn:'inherit'}">${proximos.length}</p></div>
     <div class="card"><p class="muted">Acima de 15 dias</p><p style="font-size:24px;font-weight:600;margin:4px 0 0;color:${acima.length?C.danger:'inherit'}">${acima.length}</p></div>
     <div class="card"><p class="muted">CIDs distintos</p><p style="font-size:24px;font-weight:600;margin:4px 0 0">${porCid.length}</p></div>
   </div>
   
-  <!-- CIDs e Atestados por Colaborador -->
+  <!-- Gráfico de Tendência -->
+  <div class="card" style="margin-bottom:16px">
+    <p style="margin:0 0 12px;font-weight:600">📈 Evolução de atestados por mês</p>
+    ${renderGraficoTendencia(atestadosFiltrados)}
+  </div>
+  
+  <!-- Cards Interativos -->
   <div class="flex wrap gap8" style="margin-bottom:16px">
-    <!-- CIDs -->
     <div class="card" style="flex:1;min-width:280px">
       <p style="margin:0 0 10px;font-weight:600">🏥 CIDs com mais atestados</p>
-      <div style="max-height:300px;overflow-y:auto">
+      <div style="display:grid;gap:6px;max-height:300px;overflow-y:auto">
         ${porCid.length === 0 ? '<p class="muted">Sem dados</p>' : porCid.slice(0,10).map(c => `
-          <div style="padding:8px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center">
-            <span style="font-weight:600;font-size:13px">${esc(c.label)}</span>
-            <span style="background:${C.steel};color:#fff;padding:2px 8px;border-radius:3px;font-size:11px">${c.count}</span>
-          </div>
+          <button onclick="ui.selectedCid='${esc(c.label)}'; render()" style="padding:10px;border:1px solid var(--line);background:var(--card);border-radius:4px;text-align:left;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(255,80,44,0.05)'" onmouseout="this.style.background='var(--card)'">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="font-weight:600;font-size:13px">${esc(c.label)}</span>
+              <span style="background:${C.steel};color:#fff;padding:2px 8px;border-radius:3px;font-size:11px">${c.count}</span>
+            </div>
+          </button>
         `).join("")}
       </div>
     </div>
     
-    <!-- Colaboradores com Atestados -->
     <div class="card" style="flex:1;min-width:280px">
       <p style="margin:0 0 10px;font-weight:600">👥 Colaboradores com mais atestados</p>
-      <div style="max-height:300px;overflow-y:auto">
-        ${Object.entries(
-          atestados.reduce((acc, a) => {
-            if(!acc[a.colaborador]) acc[a.colaborador] = {total: 0, dias: 0};
-            acc[a.colaborador].total++;
-            acc[a.colaborador].dias += a.dias;
-            return acc;
-          }, {})
-        ).sort((a,b) => b[1].dias - a[1].dias).slice(0, 10).map(([colab, data]) => `
-          <div style="padding:8px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <p style="margin:0;font-weight:600;font-size:12px">${esc(colab)}</p>
-              <p style="margin:2px 0 0;font-size:10px;color:var(--muted)">${data.total} atestado(s)</p>
+      <div style="display:grid;gap:6px;max-height:300px;overflow-y:auto">
+        ${colaboradoresOrdenados.length === 0 ? '<p class="muted">Sem dados</p>' : colaboradoresOrdenados.slice(0,10).map(c => `
+          <button onclick="ui.selectedColab='${esc(c.colaborador)}'; render()" style="padding:10px;border:1px solid var(--line);background:var(--card);border-radius:4px;text-align:left;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(219,168,229,0.05)'" onmouseout="this.style.background='var(--card)'">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <p style="margin:0;font-weight:600;font-size:12px">${esc(c.colaborador)}</p>
+                <p style="margin:2px 0 0;font-size:10px;color:var(--muted)">${c.total} atestado(s)</p>
+              </div>
+              <span style="background:${c.dias > 30 ? C.danger : C.warn};color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600">${c.dias}d</span>
             </div>
-            <span style="background:${data.dias > 30 ? C.danger : C.warn};color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600">${data.dias}d</span>
-          </div>
+          </button>
         `).join("")}
       </div>
     </div>
   </div>
   
-  ${alerts.length? `<div class="card" style="border-color:${C.danger};margin-bottom:16px"><p style="margin:0 0 8px;font-weight:600;color:${C.danger}">⚠ Alertas de afastamento por INSS</p>
-    ${alerts.map(a=>`<div style="border-bottom:1px solid var(--line);padding:8px 0" class="flex between wrap gap8">
-      <div><b>${esc(a.colaborador)}</b> <span class="muted">(CID ${esc(a.cid)}${a.setor?(' · '+esc(a.setor)):''})</span><br><span class="muted" style="font-size:12px">${esc(a.detalhe)}</span></div>
-      <button data-action="abrir-afastamento" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}" data-cid="${esc(a.cid)}" data-motivo="${a.motivo}">Abrir processo de afastamento</button>
-    </div>`).join("")}</div>` : `<div class="card" style="margin-bottom:16px"><p class="muted">Nenhum alerta no momento.</p></div>`}
+  <!-- Modal CID -->
+  ${ui.selectedCid ? `
+    <div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999" onclick="if(event.target===this) {ui.selectedCid=null; render()}">
+      <div class="card" style="width:90%;max-width:500px;max-height:80vh;overflow-y:auto">
+        <div style="display:flex;justify-content:space-between;margin-bottom:16px">
+          <h3 style="margin:0">CID: <b>${esc(ui.selectedCid)}</b></h3>
+          <button onclick="ui.selectedCid=null; render()" style="border:none;background:none;font-size:20px;cursor:pointer">✕</button>
+        </div>
+        <div style="display:grid;gap:8px">
+          ${atestadosFiltrados.filter(a => a.cid === ui.selectedCid).map(a => `
+            <div style="padding:12px;background:rgba(255,80,44,0.05);border-radius:6px;border-left:3px solid ${C.steel}">
+              <p style="margin:0;font-weight:600">${esc(a.colaborador)}</p>
+              <p style="margin:4px 0 0;font-size:12px;color:var(--muted)">${esc(a.filial||'—')} · ${esc(a.setor||'—')}</p>
+              <p style="margin:6px 0 0;font-size:12px"><b>${a.dias} dias</b> (${fmt(a.data_inicio)} até ${fmt(a.data_fim)})</p>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    </div>
+  ` : ''}
+  
+  <!-- Modal Colaborador -->
+  ${ui.selectedColab ? `
+    <div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999" onclick="if(event.target===this) {ui.selectedColab=null; render()}">
+      <div class="card" style="width:90%;max-width:500px;max-height:80vh;overflow-y:auto">
+        <div style="display:flex;justify-content:space-between;margin-bottom:16px">
+          <h3 style="margin:0">${esc(ui.selectedColab)}</h3>
+          <button onclick="ui.selectedColab=null; render()" style="border:none;background:none;font-size:20px;cursor:pointer">✕</button>
+        </div>
+        <div style="padding:12px;background:rgba(255,80,44,0.05);border-radius:6px;margin-bottom:16px">
+          <p style="margin:0;color:var(--muted);font-size:12px">Total de atestados</p>
+          <p style="margin:4px 0 0;font-size:18px;font-weight:600">${porColab[ui.selectedColab]?.total || 0} atestados · ${porColab[ui.selectedColab]?.dias || 0} dias</p>
+        </div>
+        <div style="display:grid;gap:8px">
+          ${(porColab[ui.selectedColab]?.atestados || []).map(a => `
+            <div style="padding:10px;background:var(--paper);border-radius:6px;border-left:3px solid ${a.dias>15?C.danger:C.warn}">
+              <p style="margin:0;font-weight:600;font-size:12px">${esc(a.cid)}</p>
+              <p style="margin:6px 0 0;font-size:12px">${fmt(a.data_inicio)} até ${fmt(a.data_fim)}</p>
+              <p style="margin:4px 0 0;font-weight:600;color:${a.dias>15?C.danger:C.warn}">${a.dias} dias</p>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    </div>
+  ` : ''}
+  
+  ${alerts.length? `
+    <div style="margin-bottom:16px">
+      <div style="padding:16px;background:${C.danger};color:#fff;border-radius:8px;margin-bottom:12px">
+        <p style="margin:0;font-weight:700;font-size:16px">🚨 ${alerts.length} alerta(s) crítico(s) de afastamento por INSS</p>
+        <p style="margin:6px 0 0;font-size:13px;opacity:0.9">Colaborador(es) atingiu(ram) limite para solicitação ao INSS</p>
+      </div>
+      <div style="display:grid;gap:12px">
+        ${alerts.map(a=>`
+          <div style="padding:14px;background:#fff;border:2px solid ${C.danger};border-radius:6px;display:flex;gap:12px">
+            <div style="font-size:28px">🔴</div>
+            <div style="flex:1">
+              <p style="margin:0;font-weight:700;font-size:14px;color:var(--ink)">${esc(a.colaborador)}</p>
+              <p style="margin:4px 0 0;font-size:12px;color:var(--muted)"><b>CID ${esc(a.cid)}</b>${a.setor ? ' · ' + esc(a.setor) : ''} ${a.filial ? ' · ' + esc(a.filial) : ''}</p>
+              <p style="margin:6px 0 0;font-size:12px;background:rgba(231,0,42,0.08);padding:6px 8px;border-radius:4px;color:${C.danger};font-weight:600">⚠️ ${esc(a.detalhe)}</p>
+            </div>
+            <button data-action="abrir-afastamento" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}" data-cid="${esc(a.cid)}" data-motivo="${a.motivo}" style="padding:8px 14px;background:${C.danger};color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:600;white-space:nowrap;align-self:center;transition:all 0.2s" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Abrir Processo →</button>
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  ` : `
+    <div style="padding:16px;background:rgba(31,138,82,0.08);border-radius:8px;margin-bottom:16px;border-left:4px solid ${C.ok}">
+      <p style="margin:0;font-weight:600;color:${C.ok}">✅ Sem alertas críticos</p>
+      <p style="margin:6px 0 0;font-size:12px;color:var(--muted)">Nenhum colaborador atingiu o limite de 15 dias de afastamento no período.</p>
+    </div>
+  `}
   <div class="card" style="margin-bottom:16px"><p style="margin:0 0 10px;font-weight:600">Registrar atestado</p>
     <div class="flex wrap gap8">
       <input id="atColab" placeholder="Colaborador" style="flex:1;min-width:160px">
@@ -364,7 +524,7 @@ function renderAfastamentos(){
   </div>
   ${ui.showImport==="atestados"? renderImportModal("atestados") : ""}
   <div class="card" style="padding:0;overflow:auto"><table><thead><tr><th>Colaborador</th><th>Filial</th><th>Setor</th><th>CID</th><th>Início</th><th>Fim</th><th>Dias</th><th>Processo</th><th></th></tr></thead>
-  <tbody>${atestados.slice().sort((a,b)=>b.data_inicio.localeCompare(a.data_inicio)).map(a=>{
+  <tbody>${atestadosFiltrados.slice().sort((a,b)=>b.data_inicio.localeCompare(a.data_inicio)).map(a=>{
     const proc = processoAfastamentoDe(a.colaborador);
     return `<tr><td>${esc(a.colaborador)}</td><td>${esc(a.filial||"—")}</td><td>${esc(a.setor||"—")}</td><td>${esc(a.cid)}</td><td>${fmt(a.data_inicio)}</td><td>${fmt(a.data_fim)}</td><td style="${a.dias>15?('color:'+C.danger+';font-weight:600'):(a.dias>=10?('color:'+C.warn):'')}">${a.dias}</td>
     <td>${proc? `<button class="link" data-action="open-detail" data-id="${proc.id}">ver processo</button>` : `<button class="link" data-action="abrir-afastamento" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}" data-cid="${esc(a.cid)}" data-motivo="manual">abrir processo</button>`}</td>
