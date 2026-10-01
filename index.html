@@ -25,11 +25,6 @@ button.link{border:none;background:none;padding:2px;color:var(--muted);}
 .muted{color:var(--muted);}
 .tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border:1px solid;font-size:12px;}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
-.etapa-drag-item{position:relative;transition:all 0.15s ease;}
-.etapa-drag-item:hover{background:rgba(255,80,44,0.05) !important;}
-.etapa-drag-item:active{cursor:grabbing !important;}
-.etapa-drag-item input{border:none;background:transparent;}
-.etapa-drag-item input:focus{outline:none;border-bottom:1px solid var(--steel) !important;box-shadow:0 0 0 3px rgba(255,80,44,0.1);}
 @media(max-width:700px){.grid4{grid-template-columns:repeat(2,1fr);}}
 .bar{height:6px;background:var(--line);position:relative;width:100px;}
 .bar>div{position:absolute;inset:0 auto 0 0;}
@@ -77,7 +72,7 @@ function calcProc(proc, templates){
 /* ---------------- estado ---------------- */
 let session=null, isAdmin=false;
 let templates={}, setoresFull=[], filiaisList=[], processos=[], atestados=[], confMap={}, contratosPrazo=[], movimentacoes=[];
-let ui = {view:"dashboard", filtroTipo:"todos", filtroStatus:"todos", filtroSetor:"todos", filtroFilial:"todos", filtroMes:"todos", filtroAno:"todos", busca:"", selectedId:null, showNovo:false, configTipo:null, showImport:null, filtroAnoAfastamento:"", filtroMesAfastamento:""};
+let ui = {view:"dashboard", filtroTipo:"todos", filtroStatus:"todos", filtroSetor:"todos", filtroFilial:"todos", filtroMes:"todos", filtroAno:"todos", busca:"", selectedId:null, showNovo:false, configTipo:null, showImport:null};
 let authMode = "login";
 function setorNomes(){ return setoresFull.map(s=>s.nome); }
 function setoresParaFilial(filial){
@@ -161,22 +156,10 @@ function renderDashboard(){
   const emAviso = processos.filter(p=> p.data_inicio_aviso && p.data_fim_aviso && hoje>=p.data_inicio_aviso && hoje<=p.data_fim_aviso);
   return `
   <div class="grid4" style="margin-bottom:20px">
-    <button class="card" style="border:none;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(255,80,44,0.05)'" onmouseout="this.style.background='var(--card)'" onclick="ui.filtroStatus='nao_iniciado'; ui.view='processos'; render()">
-      <p class="muted">Processos ativos</p><p style="font-size:26px;font-weight:600;margin:4px 0 0">${ativos.length}</p>
-      <p style="font-size:11px;color:var(--steel);margin:6px 0 0">👆 clique para filtrar</p>
-    </button>
-    <button class="card" style="border:none;cursor:pointer;transition:all 0.2s;border-color:${atrasados.length?C.danger:'inherit'}" onmouseover="this.style.background='rgba(231,0,42,0.05)'" onmouseout="this.style.background='var(--card)'" onclick="ui.filtroStatus='atrasado'; ui.view='processos'; render()">
-      <p class="muted">Atrasados</p><p style="font-size:26px;font-weight:600;margin:4px 0 0;color:${atrasados.length?C.danger:'inherit'}">${atrasados.length}</p>
-      <p style="font-size:11px;color:${atrasados.length?C.danger:C.ok};margin:6px 0 0">${atrasados.length?'⚠ clique':'✓ nenhum'}</p>
-    </button>
-    <button class="card" style="border:none;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(31,138,82,0.05)'" onmouseout="this.style.background='var(--card)'" onclick="ui.filtroStatus='concluido'; ui.view='processos'; render()">
-      <p class="muted">Concluídos este mês</p><p style="font-size:26px;font-weight:600;margin:4px 0 0">${concluidosMes}</p>
-      <p style="font-size:11px;color:var(--ok);margin:6px 0 0">👆 clique para filtrar</p>
-    </button>
-    <div class="card">
-      <p class="muted">Tempo médio de conclusão</p><p style="font-size:26px;font-weight:600;margin:4px 0 0">${tempoMedio==null?"—":tempoMedio+" dias"}</p>
-      <p style="font-size:11px;color:var(--muted);margin:6px 0 0">📊 ${concCom.length} processos</p>
-    </div>
+    <div class="card"><p class="muted">Processos ativos</p><p style="font-size:26px;font-weight:600;margin:4px 0 0">${ativos.length}</p></div>
+    <div class="card"><p class="muted">Atrasados</p><p style="font-size:26px;font-weight:600;margin:4px 0 0;color:${atrasados.length?C.danger:'inherit'}">${atrasados.length}</p></div>
+    <div class="card"><p class="muted">Concluídos este mês</p><p style="font-size:26px;font-weight:600;margin:4px 0 0">${concluidosMes}</p></div>
+    <div class="card"><p class="muted">Tempo médio de conclusão</p><p style="font-size:26px;font-weight:600;margin:4px 0 0">${tempoMedio==null?"—":tempoMedio+" dias"}</p></div>
   </div>
   <div class="card" style="margin-bottom:20px">
     <p class="muted" style="margin:0 0 10px">Processos por tipo</p>
@@ -309,105 +292,65 @@ function renderBarList(rows, corBarra, sufixo){
 }
 function renderAfastamentos(){
   if(!isAdmin) return `<div class="card"><p class="muted">O controle de afastamentos envolve CID (dado de saúde) — disponível só para gestores. Peça pro seu gestor te adicionar na tabela "admins" no Supabase se precisar de acesso.</p></div>`;
-  
-  // Calcular todos os anos disponíveis
-  const anosAtestados = Array.from(new Set(atestados.map(a=>a.data_inicio.slice(0,4)))).sort().reverse();
-  const mesesArray = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-  const mesesNomes = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-  
-  const anoFiltro = ui.filtroAnoAfastamento || '';
-  const mesFiltro = ui.filtroMesAfastamento || '';
-  
-  // Filtrar atestados
-  let atestadosFiltrados = atestados;
-  if(anoFiltro) atestadosFiltrados = atestadosFiltrados.filter(a => a.data_inicio.slice(0,4) === anoFiltro);
-  if(mesFiltro) atestadosFiltrados = atestadosFiltrados.filter(a => a.data_inicio.slice(5,7) === mesFiltro);
-  
-  const alerts = computeAlertas(atestadosFiltrados);
-  const proximos = atestadosFiltrados.filter(a=>a.dias>=10 && a.dias<=15);
-  const acima = atestadosFiltrados.filter(a=>a.dias>15);
-  const porCid = contagemPor(atestadosFiltrados, "cid");
-  
-  // Agrupar por colaborador
-  const porColab = {};
-  atestadosFiltrados.forEach(a => {
-    if(!porColab[a.colaborador]) porColab[a.colaborador] = {total: 0, dias: 0, atestados: []};
-    porColab[a.colaborador].total++;
-    porColab[a.colaborador].dias += a.dias;
-    porColab[a.colaborador].atestados.push(a);
-  });
-  
-  const colaboradoresOrdenados = Object.entries(porColab)
-    .map(([colaborador, data]) => ({colaborador, ...data}))
-    .sort((a,b) => b.dias - a.dias);
-  
+  const alerts = computeAlertas(atestados);
+  const proximos = atestados.filter(a=>a.dias>=10 && a.dias<=15);
+  const acima = atestados.filter(a=>a.dias>15);
+  const porCid = contagemPor(atestados, "cid");
+  const porSetor = contagemPor(atestados, "setor");
+  const porFilial = contagemPor(atestados, "filial");
   return `
-  <!-- Filtro de Período -->
-  <div class="card" style="margin-bottom:16px">
-    <p style="margin:0 0 10px;font-weight:600">📅 Filtrar por período</p>
-    <div class="flex wrap gap8" style="align-items:center">
-      <select data-action-change="filtroAnoAfastamento" style="flex:1;min-width:140px">
-        <option value="">— Todos os anos —</option>
-        ${anosAtestados.map(a=>`<option ${a===anoFiltro?'selected':''}>${a}</option>`).join("")}
-      </select>
-      <select data-action-change="filtroMesAfastamento" style="flex:1;min-width:140px">
-        <option value="">— Todos os meses —</option>
-        ${mesesArray.map((m, i) => `<option ${m===mesFiltro?'selected':''}>${m === mesFiltro ? '✓' : ''} ${mesesNomes[i]}</option>`).join("")}
-      </select>
-      <span class="muted" style="font-size:12px">📊 ${atestadosFiltrados.length} atestado(s)</span>
-    </div>
-  </div>
-  
-  <!-- Cards de Resumo -->
   <div class="grid4" style="margin-bottom:16px">
-    <div class="card"><p class="muted">Total no período</p><p style="font-size:24px;font-weight:600;margin:4px 0 0">${atestadosFiltrados.length}</p></div>
-    <div class="card"><p class="muted">Próximos 15 dias (10–15)</p><p style="font-size:24px;font-weight:600;margin:4px 0 0;color:${proximos.length?C.warn:'inherit'}">${proximos.length}</p></div>
+    <div class="card"><p class="muted">Total de atestados</p><p style="font-size:24px;font-weight:600;margin:4px 0 0">${atestados.length}</p></div>
+    <div class="card"><p class="muted">Próximos de 15 dias (10–15)</p><p style="font-size:24px;font-weight:600;margin:4px 0 0;color:${proximos.length?C.warn:'inherit'}">${proximos.length}</p></div>
     <div class="card"><p class="muted">Acima de 15 dias</p><p style="font-size:24px;font-weight:600;margin:4px 0 0;color:${acima.length?C.danger:'inherit'}">${acima.length}</p></div>
     <div class="card"><p class="muted">CIDs distintos</p><p style="font-size:24px;font-weight:600;margin:4px 0 0">${porCid.length}</p></div>
   </div>
   
-  <!-- Atestados por CID (simples) -->
-  <div class="card" style="margin-bottom:16px">
-    <p style="margin:0 0 10px;font-weight:600">🏥 Atestados por CID</p>
-    <div style="max-height:300px;overflow-y:auto">
-      ${renderBarList(porCid.slice(0, 15), C.steel, true)}
+  <!-- CIDs e Atestados por Colaborador -->
+  <div class="flex wrap gap8" style="margin-bottom:16px">
+    <!-- CIDs -->
+    <div class="card" style="flex:1;min-width:280px">
+      <p style="margin:0 0 10px;font-weight:600">🏥 CIDs com mais atestados</p>
+      <div style="max-height:300px;overflow-y:auto">
+        ${porCid.length === 0 ? '<p class="muted">Sem dados</p>' : porCid.slice(0,10).map(c => `
+          <div style="padding:8px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center">
+            <span style="font-weight:600;font-size:13px">${esc(c.label)}</span>
+            <span style="background:${C.steel};color:#fff;padding:2px 8px;border-radius:3px;font-size:11px">${c.count}</span>
+          </div>
+        `).join("")}
+      </div>
+    </div>
+    
+    <!-- Colaboradores com Atestados -->
+    <div class="card" style="flex:1;min-width:280px">
+      <p style="margin:0 0 10px;font-weight:600">👥 Colaboradores com mais atestados</p>
+      <div style="max-height:300px;overflow-y:auto">
+        ${Object.entries(
+          atestados.reduce((acc, a) => {
+            if(!acc[a.colaborador]) acc[a.colaborador] = {total: 0, dias: 0};
+            acc[a.colaborador].total++;
+            acc[a.colaborador].dias += a.dias;
+            return acc;
+          }, {})
+        ).sort((a,b) => b[1].dias - a[1].dias).slice(0, 10).map(([colab, data]) => `
+          <div style="padding:8px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <p style="margin:0;font-weight:600;font-size:12px">${esc(colab)}</p>
+              <p style="margin:2px 0 0;font-size:10px;color:var(--muted)">${data.total} atestado(s)</p>
+            </div>
+            <span style="background:${data.dias > 30 ? C.danger : C.warn};color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600">${data.dias}d</span>
+          </div>
+        `).join("")}
+      </div>
     </div>
   </div>
   
   ${alerts.length? `<div class="card" style="border-color:${C.danger};margin-bottom:16px"><p style="margin:0 0 8px;font-weight:600;color:${C.danger}">⚠ Alertas de afastamento por INSS</p>
     ${alerts.map(a=>`<div style="border-bottom:1px solid var(--line);padding:8px 0" class="flex between wrap gap8">
       <div><b>${esc(a.colaborador)}</b> <span class="muted">(CID ${esc(a.cid)}${a.setor?(' · '+esc(a.setor)):''})</span><br><span class="muted" style="font-size:12px">${esc(a.detalhe)}</span></div>
-      <button data-action="abrir-afastamento" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}" data-cid="${esc(a.cid)}" data-motivo="${a.motivo}">Abrir processo</button>
-    </div>`).join("")}</div>` : ''}
-  
-  <!-- Lista de Colaboradores com Atestados -->
-  <div class="card" style="margin-bottom:16px">
-    <p style="margin:0 0 10px;font-weight:600">👥 Colaboradores com atestados</p>
-    <div style="display:grid;gap:10px">
-      ${colaboradoresOrdenados.length === 0 ? '<p class="muted">Sem atestados no período</p>' : colaboradoresOrdenados.map(c => `
-        <div style="padding:12px;background:rgba(219,168,229,0.05);border-radius:6px;border-left:4px solid ${C.accent}">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-            <div>
-              <p style="margin:0;font-weight:600;color:var(--ink)">${esc(c.colaborador)}</p>
-              <p style="margin:2px 0 0;font-size:12px;color:var(--muted)">${c.atestados[0].filial || '—'} · ${c.atestados[0].setor || '—'}</p>
-            </div>
-            <div style="text-align:right">
-              <p style="margin:0;font-weight:600;font-size:14px;color:${c.dias>30?C.danger:C.warn}">${c.dias} dias</p>
-              <p style="margin:2px 0 0;font-size:11px;color:var(--muted)">${c.total} atestado(s)</p>
-            </div>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid rgba(219,168,229,0.2);padding-top:8px">
-            ${c.atestados.map(a => `
-              <span style="font-size:11px;padding:3px 8px;background:var(--card);border-radius:3px;border:1px solid var(--line)">${esc(a.cid)} — ${a.dias}d</span>
-            `).join("")}
-          </div>
-        </div>
-      `).join("")}
-    </div>
-  </div>
-  
-  <!-- Registrar novo atestado -->
-  <div class="card" style="margin-bottom:16px"><p style="margin:0 0 10px;font-weight:600">➕ Registrar atestado</p>
+      <button data-action="abrir-afastamento" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}" data-cid="${esc(a.cid)}" data-motivo="${a.motivo}">Abrir processo de afastamento</button>
+    </div>`).join("")}</div>` : `<div class="card" style="margin-bottom:16px"><p class="muted">Nenhum alerta no momento.</p></div>`}
+  <div class="card" style="margin-bottom:16px"><p style="margin:0 0 10px;font-weight:600">Registrar atestado</p>
     <div class="flex wrap gap8">
       <input id="atColab" placeholder="Colaborador" style="flex:1;min-width:160px">
       <select id="atFilial" onchange="refreshSetorSelect('atSetor', this.value)">${optsFilial("")}</select>
@@ -420,10 +363,8 @@ function renderAfastamentos(){
     </div>
   </div>
   ${ui.showImport==="atestados"? renderImportModal("atestados") : ""}
-  
-  <!-- Tabela de Atestados -->
   <div class="card" style="padding:0;overflow:auto"><table><thead><tr><th>Colaborador</th><th>Filial</th><th>Setor</th><th>CID</th><th>Início</th><th>Fim</th><th>Dias</th><th>Processo</th><th></th></tr></thead>
-  <tbody>${atestadosFiltrados.slice().sort((a,b)=>b.data_inicio.localeCompare(a.data_inicio)).map(a=>{
+  <tbody>${atestados.slice().sort((a,b)=>b.data_inicio.localeCompare(a.data_inicio)).map(a=>{
     const proc = processoAfastamentoDe(a.colaborador);
     return `<tr><td>${esc(a.colaborador)}</td><td>${esc(a.filial||"—")}</td><td>${esc(a.setor||"—")}</td><td>${esc(a.cid)}</td><td>${fmt(a.data_inicio)}</td><td>${fmt(a.data_fim)}</td><td style="${a.dias>15?('color:'+C.danger+';font-weight:600'):(a.dias>=10?('color:'+C.warn):'')}">${a.dias}</td>
     <td>${proc? `<button class="link" data-action="open-detail" data-id="${proc.id}">ver processo</button>` : `<button class="link" data-action="abrir-afastamento" data-colaborador="${esc(a.colaborador)}" data-setor="${esc(a.setor||'')}" data-cid="${esc(a.cid)}" data-motivo="manual">abrir processo</button>`}</td>
@@ -705,27 +646,15 @@ function renderConfig(){
 function renderStepsConfig(tipo){
   const tpl = templates[tipo];
   if(!isAdmin) return `<p style="font-weight:600;margin-top:0">${esc(tpl.label)}</p>${tpl.steps.map(s=>`<p style="padding:6px 0;border-bottom:1px solid var(--line)">${esc(s.label)}</p>`).join("")}`;
-  
-  const html = `<div class="flex between" style="margin-bottom:14px">
-    <p style="font-weight:600;margin:0">${esc(tpl.label)} — etapas</p>
-    <span style="font-size:12px;color:var(--muted)">👆 arraste pra reordenar</span>
+  return `<div class="flex between" style="margin-bottom:10px"><p style="font-weight:600;margin:0">${esc(tpl.label)} — etapas</p></div>
+  <div style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-height:50vh;overflow:auto;margin-bottom:12px">
+  ${tpl.steps.map((s,i)=>`<div class="flex gap8 center" style="padding:6px 0;border-bottom:1px solid var(--line)">
+    <span class="flex" style="flex-direction:column"><button class="link" data-action="move-step" data-tipo="${tipo}" data-index="${i}" data-dir="-1" ${i===0?'disabled':''}>▲</button><button class="link" data-action="move-step" data-tipo="${tipo}" data-index="${i}" data-dir="1" ${i===tpl.steps.length-1?'disabled':''}>▼</button></span>
+    <input value="${esc(s.label)}" style="flex:1" onchange="renameStep('${tipo}','${s.id}', this.value)">
+    <button class="link" data-action="remove-step" data-tipo="${tipo}" data-step="${s.id}">excluir</button>
+  </div>`).join("")}
   </div>
-  <div class="etapas-container" data-tipo="${tipo}" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-height:50vh;overflow:auto;margin-bottom:12px;background:linear-gradient(to right, rgba(255,80,44,0.02) 0%, rgba(219,168,229,0.02) 100%)">
-  ${tpl.steps.map((s,i)=>`
-    <div class="etapa-drag-item" draggable="true" data-tipo="${tipo}" data-step-id="${s.id}" data-index="${i}" style="padding:10px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;cursor:move;background:var(--card);transition:all 0.15s">
-      <span style="color:var(--steel);font-weight:600;font-size:13px;min-width:24px;text-align:center;display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:rgba(255,80,44,0.1);border-radius:4px">${i+1}</span>
-      <input value="${esc(s.label)}" style="flex:1;border-bottom:1px solid transparent;transition:all 0.15s" onchange="renameStep('${tipo}','${s.id}', this.value)">
-      <button class="link" data-action="remove-step" data-tipo="${tipo}" data-step="${s.id}" style="color:var(--danger)">✕</button>
-    </div>
-  `).join("")}
-  </div>
-  <div class="flex gap8">
-    <input id="novoStepInput" placeholder="+ Nova etapa..." style="flex:1;border-radius:4px">
-    <button class="primary" data-action="add-step">Adicionar</button>
-  </div>`;
-  
-  setTimeout(() => setupDragDrop(tipo), 0);
-  return html;
+  <div class="flex gap8"><input id="novoStepInput" placeholder="Nova etapa..." style="flex:1"><button class="primary" data-action="add-step">Adicionar</button></div>`;
 }
 function renderFiliaisConfig(){
   if(!isAdmin) return `<p style="font-weight:600;margin-top:0">Filiais</p>${filiaisList.map(f=>`<p style="padding:6px 0;border-bottom:1px solid var(--line)">${esc(f)}</p>`).join("")}`;
@@ -818,48 +747,6 @@ async function doSignup(){
   const {error} = await sb.auth.signUp({email,password});
   if(error) document.getElementById("authError").textContent = error.message;
   else document.getElementById("authError").textContent = "Conta criada! Já pode entrar.";
-}
-
-/* ---------------- drag and drop para etapas ---------------- */
-let draggedItem = null;
-function setupDragDrop(tipo){
-  const container = document.querySelector(`.etapas-container[data-tipo="${tipo}"]`);
-  if(!container) return;
-  const items = container.querySelectorAll(".etapa-drag-item");
-  items.forEach(item => {
-    item.addEventListener("dragstart", (e) => {
-      draggedItem = item;
-      item.style.opacity = "0.5";
-      e.dataTransfer.effectAllowed = "move";
-    });
-    item.addEventListener("dragend", (e) => {
-      item.style.opacity = "1";
-      items.forEach(el => el.style.borderTop = "");
-    });
-    item.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      if (draggedItem && draggedItem !== item) {
-        item.style.borderTop = "2px solid var(--steel)";
-      }
-    });
-    item.addEventListener("dragleave", (e) => {
-      item.style.borderTop = "";
-    });
-    item.addEventListener("drop", async (e) => {
-      e.preventDefault();
-      item.style.borderTop = "";
-      if (draggedItem && draggedItem !== item) {
-        const dragIndex = parseInt(draggedItem.dataset.index);
-        const dropIndex = parseInt(item.dataset.index);
-        const tipoDrag = draggedItem.dataset.tipo;
-        const tpl = templates[tipoDrag];
-        const steps = tpl.steps.slice();
-        const [moved] = steps.splice(dragIndex, 1);
-        steps.splice(dropIndex, 0, moved);
-        await sb.from("templates").update({steps}).eq("id", tipoDrag);
-      }
-    });
-  });
 }
 
 /* ---------------- eventos ---------------- */
